@@ -21,11 +21,7 @@
 <h2>Abstract</h2>
 
 <p>
-This project develops a Content Opportunity Scoring Engine using search intelligence data from the FlyRank Internship Warehouse.
-The framework combines Google Search Console and Google Analytics 4 metrics to identify pages that should be prioritized for content refresh.
-Features such as impressions, click-through rate, average ranking position, and engagement are combined into a weighted Opportunity Score.
-Each page is assigned reason codes and optimization recommendations.
-The resulting rankings provide a simple decision-support system for SEO and content optimization.
+This project develops a Content Opportunity Scoring Engine using search intelligence data from the FlyRank Internship Warehouse. The framework combines Google Search Console (GSC) and Google Analytics 4 (GA4) metrics to identify pages that should be prioritized for content refresh. Features such as impressions, click-through rate (CTR), average ranking position, and engagement are combined into a weighted Opportunity Score. Each page is assigned reason codes and optimization recommendations based on its performance. The resulting rankings provide a simple decision-support system for SEO and content optimization.
 </p>
 
 <hr>
@@ -33,9 +29,7 @@ The resulting rankings provide a simple decision-support system for SEO and cont
 <h2>Introduction</h2>
 
 <p>
-Organizations often manage thousands of content pages, making it difficult to determine which pages should be refreshed first.
-This project proposes a rule-based Content Opportunity Scoring Engine that prioritizes pages using search visibility and engagement signals.
-The objective is to help content teams focus their optimization efforts on pages with the highest potential impact.
+Organizations often manage thousands of content pages, making it difficult to determine which pages should be refreshed first. This project proposes a rule-based Content Opportunity Scoring Engine that prioritizes pages using search visibility and engagement signals. The objective is to help content teams focus their optimization efforts on pages with the highest potential impact.
 </p>
 
 <hr>
@@ -43,15 +37,14 @@ The objective is to help content teams focus their optimization efforts on pages
 <h2>Data</h2>
 
 <ul>
-<li>Dataset: FlyRank Internship Warehouse</li>
-<li>Table: fact_content_daily_performance_sample</li>
-<li>Sample Size: 50,000 records</li>
-<li>Source: Google Search Console (GSC), Google Analytics 4 (GA4), AI referral metrics</li>
+<li><strong>Dataset:</strong> FlyRank Internship Warehouse</li>
+<li><strong>Table:</strong> fact_content_daily_performance_sample</li>
+<li><strong>Sample Size:</strong> 50,000 records</li>
+<li><strong>Data Sources:</strong> Google Search Console (GSC), Google Analytics 4 (GA4), and AI referral metrics.</li>
 </ul>
 
 <p>
-Missing GA4 values were replaced with zero, while missing average search positions were replaced with 100.
-No client names, domains, or private information were used.
+Missing GA4 values were replaced with zero, while missing average search positions were replaced with 100. No client names, domains, URLs, or private information were used in this project.
 </p>
 
 <hr>
@@ -62,7 +55,7 @@ No client names, domains, or private information were used.
 
 <ul>
 <li>Filled missing GA4 values with zero.</li>
-<li>Filled missing average search position with 100.</li>
+<li>Filled missing average search position values with 100.</li>
 </ul>
 
 <h3>Feature Engineering</h3>
@@ -73,12 +66,19 @@ No client names, domains, or private information were used.
 <li>Total AI Referral Sessions</li>
 </ul>
 
+<h3>Assumptions</h3>
+
+<ul>
+<li>Missing GA4 values were treated as zero activity.</li>
+<li>Missing average search position values were replaced with 100.</li>
+<li>The Opportunity Score uses manually assigned feature weights.</li>
+<li>The score is intended for decision support rather than prediction.</li>
+</ul>
+
 <h3>Opportunity Score</h3>
 
 <p>
-A weighted scoring formula was used to rank pages according to optimization opportunity.
-The score combines impressions, CTR, ranking position, and engagement into a single value.
-The weights were manually selected for decision-support purposes.
+A weighted scoring formula was used to rank pages according to optimization opportunity. The score combines impressions, CTR, ranking position, and engagement into a single value. The feature weights were manually selected to create a simple and interpretable content prioritization framework.
 </p>
 
 <hr>
@@ -87,14 +87,14 @@ The weights were manually selected for decision-support purposes.
 
 <h3>Opportunity Score Distribution</h3>
 
-<img src="opportunity_distribution.png" width="700">
+<img src="opportunity_distribution.png" alt="Opportunity Score Distribution">
 
 <h3>Top Opportunity Pages</h3>
 
-<img src="top10_pages.png" width="700">
+<img src="top10_pages.png" alt="Top Opportunity Pages">
 
 <p>
-The Opportunity Score successfully ranks content pages and highlights pages that may benefit from content updates and SEO improvements.
+The Opportunity Score successfully ranks content pages and highlights pages that may benefit from content updates, SEO improvements, and additional optimization efforts.
 </p>
 
 <hr>
@@ -102,8 +102,7 @@ The Opportunity Score successfully ranks content pages and highlights pages that
 <h2>Limitations</h2>
 
 <p>
-This project uses a rule-based scoring approach rather than a predictive machine learning model.
-The Opportunity Score is intended to support content prioritization and should not be interpreted as a prediction of Google's ranking algorithm or future search performance.
+This project uses a rule-based scoring approach rather than a predictive machine learning model. The Opportunity Score is designed to support content prioritization and should not be interpreted as a prediction of Google's ranking algorithm or future search performance. The results should be considered as decision-support recommendations rather than guaranteed outcomes.
 </p>
 
 <hr>
@@ -117,20 +116,28 @@ The Opportunity Score is intended to support content prioritization and should n
 <li>Promote highly engaging content through additional channels.</li>
 </ul>
 
+<h3>Reason Codes Generated</h3>
+
+<p>
+Each page is assigned one or more reason codes such as <strong>High Visibility</strong>, <strong>Low CTR</strong>, <strong>Poor Ranking</strong>, <strong>High Engagement</strong>, or <strong>No Major Issue</strong>. These reason codes explain why a page received its Opportunity Score and help guide the recommended optimization actions.
+</p>
+
 <hr>
 
 <h2>Reproducibility</h2>
 
 <p>
-GitHub Repository:
+<strong>GitHub Repository:</strong><br>
 <a href="https://github.com/Rohith84/Flyrank-Week-1-" target="_blank">
 https://github.com/Rohith84/Flyrank-Week-1-
 </a>
 </p>
 
 <p>
-Notebook:
-<strong>work/FlyRank_Content_Opportunity_Scoring.ipynb</strong>
+<strong>Notebook:</strong><br>
+<a href="https://github.com/Rohith84/Flyrank-Week-1-/tree/main/work" target="_blank">
+work/FlyRank_Content_Opportunity_Scoring.ipynb
+</a>
 </p>
 
 <hr>
@@ -142,6 +149,7 @@ Built on the FlyRank ML Internship dataset.
 </p>
 
 <p>
+Data Source:
 <a href="https://flyrank.ai" target="_blank">https://flyrank.ai</a>
 </p>
 
