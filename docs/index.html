@@ -6,1264 +6,678 @@
 
     <title>Capstone Report — Content Opportunity Scoring</title>
 
-    <meta
-        name="description"
-        content="Capstone research report on Content Opportunity Scoring for SEO decision support."
-    >
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="topbar">
-    <div class="nav-container">
+<div class="container">
 
-        <a href="#top" class="brand">
-            <span class="brand-icon">FO</span>
-            <span>FlyRank Research</span>
-        </a>
+    <header>
+        <h1>Capstone Report — Content Opportunity Scoring</h1>
 
-        <nav>
-            <a href="#problem">01</a>
-            <a href="#data">02</a>
-            <a href="#baseline">03</a>
-            <a href="#method">04</a>
-            <a href="#evaluation">05</a>
-            <a href="#interpretation">06</a>
-            <a href="#recommendation">07</a>
-            <a href="#reproducibility">08</a>
-        </nav>
-
-    </div>
-</header>
-
-
-<main id="top">
-
-    <!-- HERO -->
-
-    <section class="hero">
-        <div class="container">
-
-            <div class="eyebrow">
-                CAPSTONE REPORT · MACHINE LEARNING
-            </div>
-
-            <h1>
-                Content Opportunity<br>
-                Scoring
-            </h1>
-
-            <p class="hero-subtitle">
-                A transparent ranking framework for prioritizing content
-                pages for SEO review and optimization.
+        <div class="metadata">
+            <p><strong>Author:</strong> Rohith</p>
+            <p><strong>Lane:</strong> Refresh / Content Opportunity Scoring</p>
+            <p><strong>Repo:</strong>
+                <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
+                    GitHub Repository
+                </a>
             </p>
-
-            <div class="author-block">
-
-                <div>
-                    <span>AUTHOR</span>
-                    <strong>Rohith</strong>
-                </div>
-
-                <div>
-                    <span>LANE</span>
-                    <strong>Refresh / Content Opportunity Scoring</strong>
-                </div>
-
-                <div>
-                    <span>DATE</span>
-                    <strong>10 August 2026</strong>
-                </div>
-
-            </div>
-
-            <div class="hero-actions">
-
-                <a
-                    href="https://github.com/Rohith84/Flyrank-Intern"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button primary"
-                >
-                    View Repository →
-                </a>
-
-                <a href="#problem" class="button secondary">
-                    Read Report ↓
-                </a>
-
-            </div>
-
+            <p><strong>Date:</strong> 2026-08-10</p>
         </div>
-    </section>
+    </header>
 
 
-    <!-- EXECUTIVE SUMMARY -->
+    <main>
 
-    <section class="summary">
-        <div class="container">
-
-            <div class="section-label">
-                EXECUTIVE SUMMARY
-            </div>
-
-            <div class="summary-grid">
-
-                <div>
-                    <h2>
-                        A ranking problem,
-                        not a prediction claim.
-                    </h2>
-                </div>
-
-                <div>
-                    <p>
-                        This project supports the decision of which content
-                        pages should be reviewed first when a content team
-                        cannot optimize every page at once.
-                    </p>
-
-                    <p>
-                        A weighted Opportunity Score combines impressions,
-                        CTR, average search position, and engagement into
-                        a transparent ranking.
-                    </p>
-
-                    <p>
-                        The score produces a substantially different
-                        top-50 queue from the Week-4 baseline, but the
-                        available June-only dataset does not support a
-                        claim about future performance.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 01 -->
-
-    <section id="problem" class="section">
-        <div class="container">
-
-            <div class="section-number">01</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        PROBLEM FRAMING
-                    </span>
-
-                    <h2>
-                        Which pages deserve
-                        attention first?
-                    </h2>
-                </div>
-
-                <p>
-                    Content teams often have more pages than they can
-                    review simultaneously. The practical problem is
-                    therefore prioritization.
-                </p>
-            </div>
-
-
-            <div class="four-grid">
-
-                <article class="info-card">
-                    <span class="card-index">01</span>
-                    <h3>Decision</h3>
-                    <p>
-                        Which content pages should be prioritized for
-                        optimization review?
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-index">02</span>
-                    <h3>Unit of analysis</h3>
-                    <p>
-                        A content page aggregated over the June 2026
-                        observation window.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-index">03</span>
-                    <h3>Output</h3>
-                    <p>
-                        A ranked Opportunity Score and ordered review queue.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-index">04</span>
-                    <h3>Cost of error</h3>
-                    <p>
-                        Optimization effort may be spent on a lower-value
-                        page while another opportunity is missed.
-                    </p>
-                </article>
-
-            </div>
-
-
-            <div class="decision-box">
-
-                <div class="decision-icon">↗</div>
-
-                <div>
-                    <h3>Why data helps</h3>
-
-                    <p>
-                        Impressions, clicks, CTR, average search position,
-                        and engagement provide measurable signals that can
-                        be combined into a repeatable prioritization
-                        framework.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 02 -->
-
-    <section id="data" class="section dark">
-        <div class="container">
-
-            <div class="section-number">02</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        DATA SAFETY
-                    </span>
-
-                    <h2>
-                        The June 2026
-                        warehouse release.
-                    </h2>
-                </div>
-
-                <p>
-                    The analysis uses the FlyRank internship warehouse
-                    release available for June 2026.
-                </p>
-            </div>
-
-
-            <div class="stats">
-
-                <div class="stat">
-                    <strong>11.69M</strong>
-                    <span>Raw records</span>
-                </div>
-
-                <div class="stat">
-                    <strong>409,205</strong>
-                    <span>Page-level observations</span>
-                </div>
-
-                <div class="stat">
-                    <strong>65</strong>
-                    <span>Unique clients</span>
-                </div>
-
-                <div class="stat">
-                    <strong>30</strong>
-                    <span>Days in release</span>
-                </div>
-
-            </div>
-
-
-            <div class="data-grid">
-
-                <div class="dark-card">
-                    <span class="small-label">DATE WINDOW</span>
-
-                    <h3>
-                        2026-06-01
-                        <span>→</span>
-                        2026-06-30
-                    </h3>
-
-                    <p>
-                        Only one month is available in the warehouse
-                        release used for this analysis.
-                    </p>
-                </div>
-
-
-                <div class="dark-card">
-                    <span class="small-label">PRIMARY SIGNALS</span>
-
-                    <ul class="signal-list">
-                        <li>GSC impressions</li>
-                        <li>CTR</li>
-                        <li>Average position</li>
-                        <li>GA4 engagement</li>
-                    </ul>
-                </div>
-
-
-                <div class="dark-card">
-                    <span class="small-label">EXCLUDED</span>
-
-                    <ul class="signal-list">
-                        <li>Client identifiers as features</li>
-                        <li>Content identifiers as features</li>
-                        <li>Future-window information</li>
-                        <li>Label-derived fields</li>
-                        <li>Private queries and URLs</li>
-                    </ul>
-                </div>
-
-            </div>
-
-
-            <div class="warning">
-
-                <strong>DATA LIMITATION</strong>
-
-                <p>
-                    The available warehouse release contains only June
-                    2026. There is no July or later observation available
-                    for constructing a future decline label.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 03 -->
-
-    <section id="baseline" class="section">
-        <div class="container">
-
-            <div class="section-number">03</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        BASELINE
-                    </span>
-
-                    <h2>
-                        Start with a rule
-                        you can explain.
-                    </h2>
-                </div>
-
-                <p>
-                    The Week-4 baseline uses two observable signals:
-                    high impressions and low CTR.
-                </p>
-            </div>
-
-
-            <div class="baseline-grid">
-
-                <div class="baseline-panel">
-
-                    <span class="small-label">
-                        WEEK 04
-                    </span>
-
-                    <h3>
-                        Transparent baseline
-                    </h3>
-
-                    <div class="baseline-rule">
-                        <span>High impressions</span>
-                        <strong>+</strong>
-                        <span>Low CTR</span>
-                    </div>
-
-                    <div class="threshold-row">
-                        <span>High-impression threshold</span>
-                        <strong>524</strong>
-                    </div>
-
-                    <div class="threshold-row">
-                        <span>Low-CTR threshold</span>
-                        <strong>0.0</strong>
-                    </div>
-
-                </div>
-
-
-                <div class="vs">
-                    VS
-                </div>
-
-
-                <div class="baseline-panel featured">
-
-                    <span class="small-label">
-                        WEEK 05
-                    </span>
-
-                    <h3>
-                        Opportunity Score
-                    </h3>
-
-                    <div class="feature-pills">
-                        <span>Impressions</span>
-                        <span>CTR</span>
-                        <span>Position</span>
-                        <span>Engagement</span>
-                    </div>
-
-                    <div class="threshold-row">
-                        <span>Weighted signals</span>
-                        <strong>4</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="note">
-
-                <strong>Baseline observation</strong>
-
-                <p>
-                    The measured low-CTR threshold was 0.0 because many
-                    pages have zero observed CTR. This makes the baseline
-                    relatively coarse and is an important limitation of
-                    the comparison.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 04 -->
-
-    <section id="method" class="section soft">
-        <div class="container">
-
-            <div class="section-number">04</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        MODEL / ANALYSIS
-                    </span>
-
-                    <h2>
-                        Four signals.
-                        One readable score.
-                    </h2>
-                </div>
-
-                <p>
-                    The final method is weighted scoring and ranking,
-                    rather than a supervised classification model.
-                </p>
-            </div>
-
-
-            <div class="formula-card">
-
-                <span class="small-label">
-                    OPPORTUNITY SCORE
-                </span>
-
-                <div class="formula">
-                    <span>35%</span> Visibility
-                    <b>+</b>
-                    <span>30%</span> CTR Opportunity
-                    <b>+</b>
-                    <span>20%</span> Position
-                    <b>+</b>
-                    <span>15%</span> Engagement
-                </div>
-
-                <p>
-                    Each component is normalized before the weighted
-                    score is calculated.
-                </p>
-
-            </div>
-
-
-            <div class="weights">
-
-                <div class="weight">
-                    <div class="weight-top">
-                        <span>Impressions</span>
-                        <strong>35%</strong>
-                    </div>
-
-                    <div class="weight-track">
-                        <span style="width:35%"></span>
-                    </div>
-                </div>
-
-
-                <div class="weight">
-                    <div class="weight-top">
-                        <span>CTR</span>
-                        <strong>30%</strong>
-                    </div>
-
-                    <div class="weight-track">
-                        <span style="width:30%"></span>
-                    </div>
-                </div>
-
-
-                <div class="weight">
-                    <div class="weight-top">
-                        <span>Position</span>
-                        <strong>20%</strong>
-                    </div>
-
-                    <div class="weight-track">
-                        <span style="width:20%"></span>
-                    </div>
-                </div>
-
-
-                <div class="weight">
-                    <div class="weight-top">
-                        <span>Engagement</span>
-                        <strong>15%</strong>
-                    </div>
-
-                    <div class="weight-track">
-                        <span style="width:15%"></span>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="method-info">
-
-                <div>
-                    <span class="small-label">
-                        FEATURES
-                    </span>
-
-                    <p>
-                        <code>gsc_impressions</code>,
-                        <code>ctr</code>,
-                        <code>gsc_avg_position</code>,
-                        and
-                        <code>engagement_per_session</code>.
-                    </p>
-                </div>
-
-
-                <div>
-                    <span class="small-label">
-                        TARGET / PROXY
-                    </span>
-
-                    <p>
-                        No supervised target is used. The Opportunity
-                        Score acts as a prioritization proxy for human
-                        content review.
-                    </p>
-                </div>
-
-            </div>
-
-
-            <div class="validation">
-
-                <span class="small-label">
-                    GROUPED VALIDATION
-                </span>
-
-                <div class="validation-grid">
-
-                    <div>
-                        <strong>52</strong>
-                        <span>Train clients</span>
-                    </div>
-
-                    <div>
-                        <strong>13</strong>
-                        <span>Test clients</span>
-                    </div>
-
-                    <div>
-                        <strong>0</strong>
-                        <span>Client overlap</span>
-                    </div>
-
-                    <div>
-                        <strong>80/20</strong>
-                        <span>Split</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 05 -->
-
-    <section id="evaluation" class="section">
-        <div class="container">
-
-            <div class="section-number">05</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        EVALUATION
-                    </span>
-
-                    <h2>
-                        Same population.
-                        Different queue.
-                    </h2>
-                </div>
-
-                <p>
-                    Both strategies were evaluated on the same
-                    client-grouped evaluation population.
-                </p>
-            </div>
-
-
-            <div class="result-grid">
-
-                <div class="result">
-                    <strong>0</strong>
-                    <span>Shared top-50 pages</span>
-                </div>
-
-                <div class="result">
-                    <strong>50</strong>
-                    <span>Opportunity-only pages</span>
-                </div>
-
-                <div class="result">
-                    <strong>50</strong>
-                    <span>Baseline-only pages</span>
-                </div>
-
-            </div>
-
-
-            <div class="chart-card">
-
-                <div class="chart-heading">
-                    <div>
-                        <span class="small-label">
-                            TOP-50 COMPOSITION
-                        </span>
-
-                        <h3>
-                            Ranking overlap
-                        </h3>
-                    </div>
-
-                    <span>
-                        Same evaluation population
-                    </span>
-                </div>
-
-
-                <div class="bar-list">
-
-                    <div class="bar-row">
-
-                        <div class="bar-label">
-                            <span>Shared</span>
-                            <strong>0</strong>
-                        </div>
-
-                        <div class="bar-track">
-                            <span style="width:0%"></span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="bar-row">
-
-                        <div class="bar-label">
-                            <span>Opportunity only</span>
-                            <strong>50</strong>
-                        </div>
-
-                        <div class="bar-track">
-                            <span style="width:100%"></span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="bar-row">
-
-                        <div class="bar-label">
-                            <span>Baseline only</span>
-                            <strong>50</strong>
-                        </div>
-
-                        <div class="bar-track muted">
-                            <span style="width:100%"></span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="evaluation-table">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Measure</th>
-                            <th>Result</th>
-                            <th>Meaning</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-                            <td>Top-50 overlap</td>
-                            <td><strong>0 / 50</strong></td>
-                            <td>
-                                The two approaches prioritize
-                                completely different pages.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Opportunity-only</td>
-                            <td><strong>50</strong></td>
-                            <td>
-                                Multi-signal scoring surfaces pages
-                                not selected by the baseline.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Future validation</td>
-                            <td><strong>Unavailable</strong></td>
-                            <td>
-                                June is the only available month.
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-            <div class="error-analysis">
-
-                <span class="small-label">
-                    ERROR ANALYSIS
-                </span>
-
-                <h3>
-                    Some high-ranked pages have almost no visibility.
-                </h3>
-
-                <p>
-                    Several highly ranked pages have only a small number
-                    of impressions while having very poor average search
-                    positions. Poor position contributes positively to
-                    the Opportunity Score, but extremely low visibility
-                    may make these pages less practical refresh candidates.
-                </p>
-
-                <p>
-                    These examples demonstrate why the score should be
-                    used as a review queue rather than an automatic action
-                    list.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 06 -->
-
-    <section id="interpretation" class="section dark">
-        <div class="container">
-
-            <div class="section-number">06</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        INTERPRETATION
-                    </span>
-
-                    <h2>
-                        What the analysis
-                        actually found.
-                    </h2>
-                </div>
-
-                <p>
-                    The strongest result is a change in prioritization,
-                    not a claim of predictive superiority.
-                </p>
-            </div>
-
-
-            <div class="interpretation-grid">
-
-                <article>
-                    <span>01</span>
-
-                    <h3>
-                        Different rankings
-                    </h3>
-
-                    <p>
-                        The Opportunity Score and baseline produce
-                        substantially different top-50 queues.
-                    </p>
-                </article>
-
-
-                <article>
-                    <span>02</span>
-
-                    <h3>
-                        Multiple signals matter
-                    </h3>
-
-                    <p>
-                        Adding CTR, position, and engagement changes
-                        which pages receive high priority.
-                    </p>
-                </article>
-
-
-                <article>
-                    <span>03</span>
-
-                    <h3>
-                        Weak picks exist
-                    </h3>
-
-                    <p>
-                        Very low-impression pages can rank highly
-                        because poor position contributes to the score.
-                    </p>
-                </article>
-
-
-                <article>
-                    <span>04</span>
-
-                    <h3>
-                        Future outcome unavailable
-                    </h3>
-
-                    <p>
-                        The June-only release cannot establish future
-                        improvement or decline.
-                    </p>
-                </article>
-
-            </div>
-
-
-            <div class="claims">
-
-                <div>
-                    <span>OBSERVED</span>
-                    <p>
-                        The two ranking strategies produce different
-                        queues.
-                    </p>
-                </div>
-
-                <div>
-                    <span>DIRECTIONAL</span>
-                    <p>
-                        Multiple signals change page prioritization
-                        under the defined weights.
-                    </p>
-                </div>
-
-                <div>
-                    <span>DECISION-SUPPORT</span>
-                    <p>
-                        The ranking can help editors decide where
-                        to begin review.
-                    </p>
-                </div>
-
-                <div>
-                    <span>NOT CLAIMED</span>
-                    <p>
-                        Future performance, causal impact, or Google's
-                        ranking algorithm.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 07 -->
-
-    <section id="recommendation" class="section">
-        <div class="container">
-
-            <div class="section-number">07</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        RECOMMENDATION
-                    </span>
-
-                    <h2>
-                        Turn the ranking
-                        into an action queue.
-                    </h2>
-                </div>
-
-                <p>
-                    The output is intended to support an editor's
-                    judgment, not replace it.
-                </p>
-            </div>
-
-
-            <div class="recommendations">
-
-                <article class="recommendation">
-
-                    <div class="rank">01</div>
-
-                    <div>
-                        <span>HIGH PRIORITY</span>
-
-                        <h3>
-                            Review visible pages with weak CTR
-                        </h3>
-
-                        <p>
-                            Investigate titles, descriptions, intent
-                            alignment, and search presentation.
-                        </p>
-                    </div>
-
-                    <strong>REVIEW</strong>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">02</div>
-
-                    <div>
-                        <span>HIGH PRIORITY</span>
-
-                        <h3>
-                            Investigate pages with poor position
-                        </h3>
-
-                        <p>
-                            Examine content relevance, internal links,
-                            and topical coverage.
-                        </p>
-                    </div>
-
-                    <strong>AUDIT</strong>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">03</div>
-
-                    <div>
-                        <span>MEDIUM PRIORITY</span>
-
-                        <h3>
-                            Use engagement as supporting evidence
-                        </h3>
-
-                        <p>
-                            Treat engagement as context rather than
-                            an automatic refresh trigger.
-                        </p>
-                    </div>
-
-                    <strong>CONTEXT</strong>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">04</div>
-
-                    <div>
-                        <span>CAUTION</span>
-
-                        <h3>
-                            Verify extremely low-impression pages
-                        </h3>
-
-                        <p>
-                            Poor position can inflate opportunity even
-                            when actual visibility is tiny.
-                        </p>
-                    </div>
-
-                    <strong>VERIFY</strong>
-
-                </article>
-
-            </div>
-
-
-            <div class="confidence">
-
-                <div>
-                    <span class="small-label">
-                        CONFIDENCE
-                    </span>
-
-                    <h3>
-                        Moderate for ranking behavior.
-                        Low for future performance.
-                    </h3>
-                </div>
-
-                <p>
-                    The score is deterministic and its ranking behavior
-                    can be directly observed. However, the June-only
-                    dataset provides no future outcome against which
-                    predictive performance can be measured.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- 08 -->
-
-    <section id="reproducibility" class="section soft">
-        <div class="container">
-
-            <div class="section-number">08</div>
-
-            <div class="section-title">
-                <div>
-                    <span class="section-label">
-                        REPRODUCIBILITY
-                    </span>
-
-                    <h2>
-                        Inspect the work.
-                        Re-run the analysis.
-                    </h2>
-                </div>
-
-                <p>
-                    The notebooks and project artifacts are maintained
-                    in the public repository.
-                </p>
-            </div>
-
-
-            <div class="resource-grid">
-
-                <a
-                    href="https://github.com/Rohith84/Flyrank-Intern"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="resource"
-                >
-                    <span>REPOSITORY</span>
-
-                    <h3>
-                        Flyrank-Intern
-                    </h3>
-
-                    <p>
-                        Project notebooks, assignments, and capstone
-                        artifacts.
-                    </p>
-
-                    <strong>
-                        Open repository →
-                    </strong>
-                </a>
-
-
-                <a
-                    href="https://github.com/Rohith84/Flyrank-Intern/blob/main/work/notebooks/w04_baseline_score.ipynb"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="resource"
-                >
-                    <span>BASELINE</span>
-
-                    <h3>
-                        W04 Baseline
-                    </h3>
-
-                    <p>
-                        Transparent baseline score and ranked queue.
-                    </p>
-
-                    <strong>
-                        Open notebook →
-                    </strong>
-                </a>
-
-
-                <a
-                    href="https://github.com/Rohith84/Flyrank-Intern/blob/main/work/notebooks/w05_model.ipynb"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="resource"
-                >
-                    <span>ANALYSIS</span>
-
-                    <h3>
-                        W05 Modeling
-                    </h3>
-
-                    <p>
-                        Opportunity Score, grouped evaluation,
-                        comparison, and interpretation.
-                    </p>
-
-                    <strong>
-                        Open notebook →
-                    </strong>
-                </a>
-
-            </div>
-
-
-            <div class="reproduction-box">
-
-                <h3>
-                    Reproduction environment
-                </h3>
-
-                <p>
-                    Python, Pandas, NumPy, DuckDB, scikit-learn,
-                    Hugging Face Hub, Jupyter / Google Colab.
-                </p>
-
-                <div class="command">
-                    <code>
-                        git clone https://github.com/Rohith84/Flyrank-Intern.git
-                    </code>
-                </div>
-
-                <div class="command">
-                    <code>
-                        cd Flyrank-Intern
-                    </code>
-                </div>
-
-                <div class="command">
-                    <code>
-                        pip install -r requirements.txt
-                    </code>
-                </div>
-
-                <p>
-                    Random seed: <strong>42</strong>.
-                    Client-grouped split: <strong>80/20</strong>.
-                </p>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <!-- FINAL -->
-
-    <section class="final-section">
-
-        <div class="container">
-
-            <span class="section-label">
-                FINAL STATEMENT
-            </span>
-
-            <h2>
-                Observed.<br>
-                Directional.<br>
-                Decision-support.
-            </h2>
+        <!-- 1 -->
+        <section>
+            <h2>1. Problem framing</h2>
 
             <p>
-                This work does not claim to predict Google, prove causality,
-                or guarantee that a content refresh will improve performance.
-                It provides a transparent ranking framework for deciding
-                where human review can begin.
+                This project supports the decision of which content pages
+                should be reviewed for potential refresh or optimization
+                first when a content team has more pages than it can
+                review at once.
             </p>
 
-        </div>
+            <p>
+                The unit of analysis is a content page aggregated over
+                the June 2026 observation window. The output is a ranked
+                Opportunity Score and an ordered queue of pages for
+                human review.
+            </p>
 
-    </section>
+            <p>
+                The intended action is for an editor or SEO/content team
+                member to inspect high-ranked pages and decide whether
+                they are suitable candidates for actions such as reviewing
+                page content, titles, descriptions, internal links,
+                search-intent alignment, or other optimization opportunities.
+            </p>
+
+            <p>
+                The cost of a wrong recommendation is wasted optimization
+                effort. A page with little practical opportunity may receive
+                attention while another page with more meaningful search
+                visibility remains unattended.
+            </p>
+
+            <p>
+                Data helps because impressions, clicks, CTR, average search
+                position, and engagement provide measurable signals that
+                can be combined into a repeatable prioritization framework
+                rather than relying only on manual selection.
+            </p>
+
+            <p>
+                This is a decision-support ranking problem, not a claim
+                that the score predicts Google's ranking algorithm or
+                guarantees future search performance.
+            </p>
+        </section>
+
+
+        <!-- 2 -->
+        <section>
+            <h2>2. Data safety</h2>
+
+            <p>
+                The analysis uses the FlyRank internship warehouse dataset,
+                specifically the content performance data available for
+                the June 2026 release.
+            </p>
+
+            <h3>Observation window</h3>
+
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+
+                <tr>
+                    <td>Start date</td>
+                    <td>2026-06-01</td>
+                </tr>
+
+                <tr>
+                    <td>End date</td>
+                    <td>2026-06-30</td>
+                </tr>
+
+                <tr>
+                    <td>Raw records</td>
+                    <td>11,694,072</td>
+                </tr>
+
+                <tr>
+                    <td>Page-level observations</td>
+                    <td>409,205</td>
+                </tr>
+
+                <tr>
+                    <td>Unique clients</td>
+                    <td>65</td>
+                </tr>
+
+                <tr>
+                    <td>Unique pages</td>
+                    <td>409,205</td>
+                </tr>
+
+                <tr>
+                    <td>Unique months</td>
+                    <td>1</td>
+                </tr>
+            </table>
+
+            <h3>Primary signals</h3>
+
+            <ul>
+                <li><code>gsc_impressions</code></li>
+                <li><code>ctr</code></li>
+                <li><code>gsc_avg_position</code></li>
+                <li>Engagement metrics</li>
+            </ul>
+
+            <h3>Excluded information</h3>
+
+            <ul>
+                <li>Client identifiers as predictive features</li>
+                <li>Content identifiers as predictive features</li>
+                <li>Future-window information</li>
+                <li>Label-derived fields</li>
+                <li>Private queries and URLs</li>
+            </ul>
+
+            <p>
+                Pseudonymous identifiers such as
+                <code>client_hash_id</code> and
+                <code>content_hash_id</code> are used for grouping or
+                page identification only. They are not used as predictive
+                features.
+            </p>
+
+            <p>
+                Fields such as <code>trend_direction</code> and
+                <code>trend_pct</code> were not used. No client names,
+                private URLs, private queries, or other client-identifying
+                information are intentionally included in
+                <code>work/</code>.
+            </p>
+        </section>
+
+
+        <!-- 3 -->
+        <section>
+            <h2>3. Baseline</h2>
+
+            <p>
+                The first baseline was a transparent rule-based ranking
+                approach developed during Week 4.
+            </p>
+
+            <p>
+                The baseline uses two observable signals:
+            </p>
+
+            <ol>
+                <li>High impressions</li>
+                <li>Low CTR</li>
+            </ol>
+
+            <table>
+                <tr>
+                    <th>Baseline parameter</th>
+                    <th>Observed value</th>
+                </tr>
+
+                <tr>
+                    <td>High-impression threshold</td>
+                    <td>524</td>
+                </tr>
+
+                <tr>
+                    <td>Low-CTR threshold</td>
+                    <td>0.0</td>
+                </tr>
+            </table>
+
+            <p>
+                The low-CTR threshold is an important limitation because
+                a substantial number of pages have zero observed CTR.
+                Therefore, the baseline is relatively coarse and does
+                not distinguish between different low-CTR values below
+                a positive threshold.
+            </p>
+
+            <p>
+                The baseline is a fair starting point because it uses
+                simple, observable search signals and can be understood
+                without a machine learning model.
+            </p>
+
+            <p>
+                The baseline and Opportunity Score were evaluated on
+                the same evaluation population.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Comparison</th>
+                    <th>Result</th>
+                </tr>
+
+                <tr>
+                    <td>Baseline top 50</td>
+                    <td>50 pages</td>
+                </tr>
+
+                <tr>
+                    <td>Opportunity Score top 50</td>
+                    <td>50 pages</td>
+                </tr>
+
+                <tr>
+                    <td>Pages shared by both</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>Opportunity-only pages</td>
+                    <td>50</td>
+                </tr>
+
+                <tr>
+                    <td>Baseline-only pages</td>
+                    <td>50</td>
+                </tr>
+            </table>
+        </section>
+
+
+        <!-- 4 -->
+        <section>
+            <h2>4. Model / analysis</h2>
+
+            <p>
+                The final method is a weighted Content Opportunity Score
+                rather than a supervised machine learning classifier.
+            </p>
+
+            <p>
+                The method fits the lane because the immediate objective
+                is to prioritize pages for human review using several
+                observable search and engagement signals.
+            </p>
+
+            <h3>Features</h3>
+
+            <ul>
+                <li><code>gsc_impressions</code></li>
+                <li><code>ctr</code></li>
+                <li><code>gsc_avg_position</code></li>
+                <li>Engagement per session</li>
+            </ul>
+
+            <h3>Weighted Opportunity Score</h3>
+
+            <table>
+                <tr>
+                    <th>Signal</th>
+                    <th>Weight</th>
+                </tr>
+
+                <tr>
+                    <td>Impressions</td>
+                    <td>35%</td>
+                </tr>
+
+                <tr>
+                    <td>CTR opportunity</td>
+                    <td>30%</td>
+                </tr>
+
+                <tr>
+                    <td>Position opportunity</td>
+                    <td>20%</td>
+                </tr>
+
+                <tr>
+                    <td>Engagement opportunity</td>
+                    <td>15%</td>
+                </tr>
+            </table>
+
+            <p>
+                Client and content identifiers were left out intentionally
+                because they identify entities rather than represent useful
+                behavioral signals.
+            </p>
+
+            <p>
+                Future performance variables and label-derived variables
+                were also excluded to avoid leakage.
+            </p>
+
+            <p>
+                There is no supervised target in the final scoring analysis.
+                Instead, the output is a defined Opportunity Score, which
+                acts as a prioritization proxy.
+            </p>
+
+            <p>
+                <strong>Target / proxy definition:</strong>
+                The Opportunity Score represents the relative priority
+                of a content page for human review based on its observed
+                search visibility, CTR, search position, and engagement
+                signals.
+            </p>
+        </section>
+
+
+        <!-- 5 -->
+        <section>
+            <h2>5. Evaluation</h2>
+
+            <p>
+                The page-level data was evaluated using a client-grouped
+                split. Grouping by client prevents the same client from
+                appearing in both evaluation groups.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Evaluation property</th>
+                    <th>Value</th>
+                </tr>
+
+                <tr>
+                    <td>Split</td>
+                    <td>80% / 20%</td>
+                </tr>
+
+                <tr>
+                    <td>Training clients</td>
+                    <td>52</td>
+                </tr>
+
+                <tr>
+                    <td>Evaluation clients</td>
+                    <td>13</td>
+                </tr>
+
+                <tr>
+                    <td>Client overlap</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>Random seed</td>
+                    <td>42</td>
+                </tr>
+            </table>
+
+            <h3>Model vs baseline</h3>
+
+            <table>
+                <tr>
+                    <th>Measure</th>
+                    <th>Baseline</th>
+                    <th>Opportunity Score</th>
+                </tr>
+
+                <tr>
+                    <td>Top-50 pages</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+
+                <tr>
+                    <td>Shared pages</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>Unique pages</td>
+                    <td>50</td>
+                    <td>50</td>
+                </tr>
+            </table>
+
+            <p>
+                The zero-overlap result shows that the multi-signal scoring
+                method produces a substantially different prioritization
+                from the simpler baseline.
+            </p>
+
+            <p>
+                It does not establish that one ranking is more accurate
+                because the available dataset contains only June 2026 and
+                therefore does not provide a future outcome against which
+                the recommendations can be evaluated.
+            </p>
+
+            <h3>Error analysis</h3>
+
+            <p>
+                Some high-ranked Opportunity Score pages have extremely
+                low observed impressions. These pages can receive a high
+                opportunity component because their average search position
+                is poor.
+            </p>
+
+            <p>
+                However, extremely low visibility may make them less
+                practical refresh candidates. This is an important weak-pick
+                pattern.
+            </p>
+
+            <p>
+                The score should therefore be treated as a review queue
+                rather than an automatic action list.
+            </p>
+        </section>
+
+
+        <!-- 6 -->
+        <section>
+            <h2>6. Interpretation</h2>
+
+            <p>
+                The main observed finding is that the Opportunity Score
+                and the Week-4 baseline prioritize substantially different
+                pages.
+            </p>
+
+            <p>
+                The baseline concentrates on a simpler combination of
+                high impressions and low CTR.
+            </p>
+
+            <p>
+                The Opportunity Score introduces additional signals:
+                CTR, position, and engagement. As a result, pages with
+                different combinations of search visibility, position,
+                CTR, and engagement can move into the highest-priority
+                portion of the queue.
+            </p>
+
+            <p>
+                The strongest measurable difference is the zero overlap
+                between the two top-50 queues.
+            </p>
+
+            <p>
+                This means that adding multiple signals changes the
+                prioritization substantially under the defined scoring
+                weights.
+            </p>
+
+            <p>
+                A negative result is also important: poor search position
+                alone does not necessarily indicate a practically useful
+                refresh opportunity. Pages with extremely low impressions
+                can still receive high scores when position contributes
+                strongly to the score.
+            </p>
+
+            <p>
+                This indicates that the ranking requires human
+                interpretation.
+            </p>
+
+            <p>
+                The manually selected weights are another limitation.
+                They provide transparency, but they are not learned from
+                a future outcome.
+            </p>
+
+            <p>
+                Because there is no future month in the available release,
+                the analysis cannot determine whether the pages selected
+                by either ranking subsequently improve or decline.
+            </p>
+        </section>
+
+
+        <!-- 7 -->
+        <section>
+            <h2>7. Recommendation</h2>
+
+            <p>
+                The ranked output should be used as a decision-support
+                queue for content editors and SEO teams.
+            </p>
+
+            <h3>1. Review high-visibility pages with weak CTR</h3>
+
+            <p>
+                Pages with meaningful impressions and weaker CTR can be
+                investigated for possible title, description, search-intent,
+                or content-presentation improvements.
+            </p>
+
+            <p><strong>Action:</strong> Review</p>
+
+
+            <h3>2. Investigate pages with meaningful visibility and poor position</h3>
+
+            <p>
+                Pages receiving impressions while appearing at weaker
+                search positions can be examined for content relevance,
+                internal linking, topical coverage, and other optimization
+                opportunities.
+            </p>
+
+            <p><strong>Action:</strong> Audit</p>
+
+
+            <h3>3. Use engagement as supporting evidence</h3>
+
+            <p>
+                Engagement should provide additional context when deciding
+                whether a page deserves review. It should not automatically
+                determine whether a page should be refreshed.
+            </p>
+
+            <p><strong>Action:</strong> Contextualize</p>
+
+
+            <h3>4. Manually verify extremely low-impression recommendations</h3>
+
+            <p>
+                Pages with very few impressions can receive high Opportunity
+                Scores because poor search position contributes to the score.
+                These pages should not automatically be placed ahead of
+                pages with meaningful search visibility.
+            </p>
+
+            <p><strong>Action:</strong> Verify</p>
+
+
+            <h3>Confidence and limitations</h3>
+
+            <p>
+                Confidence is moderate for the ranking behavior itself
+                because the score is deterministic and the two ranking
+                strategies can be directly compared on the same evaluation
+                population.
+            </p>
+
+            <p>
+                Confidence is low for future performance claims because
+                the available release contains only June 2026 and provides
+                no future outcome against which predictive performance
+                can be measured.
+            </p>
+
+            <p>
+                The Opportunity Score should therefore be used as a
+                directional decision-support mechanism, not as proof that
+                a refresh will improve rankings, traffic, CTR, or engagement.
+            </p>
+
+            <p>
+                No causal claim is made.
+            </p>
+        </section>
+
+
+        <!-- 8 -->
+        <section>
+            <h2>8. Reproducibility</h2>
+
+            <p>
+                The project is maintained in the public repository:
+            </p>
+
+            <p>
+                <a
+                    href="https://github.com/Rohith84/Flyrank-Intern"
+                    target="_blank"
+                >
+                    https://github.com/Rohith84/Flyrank-Intern
+                </a>
+            </p>
+
+            <h3>Relevant notebooks</h3>
+
+            <ul>
+                <li>
+                    <code>work/notebooks/w04_baseline_score.ipynb</code>
+                </li>
+
+                <li>
+                    <code>work/notebooks/w05_model.ipynb</code>
+                </li>
+            </ul>
+
+            <h3>Environment</h3>
+
+            <ul>
+                <li>Python</li>
+                <li>Pandas</li>
+                <li>NumPy</li>
+                <li>DuckDB</li>
+                <li>scikit-learn</li>
+                <li>Hugging Face Hub</li>
+                <li>Jupyter / Google Colab</li>
+            </ul>
+
+            <h3>Re-run</h3>
+
+            <pre><code>git clone https://github.com/Rohith84/Flyrank-Intern.git
+cd Flyrank-Intern
+pip install -r requirements.txt</code></pre>
+
+            <p>
+                Random seed: <strong>42</strong>.
+                Client-grouped split: <strong>80/20</strong>.
+            </p>
+
+            <p>
+                The relevant notebooks should be executed from top to
+                bottom in a clean runtime with the required dataset access
+                and dependencies.
+            </p>
+        </section>
+
+
+        <!-- CLAIMS -->
+
+        <section class="claims">
+            <h2>Claims checklist</h2>
+
+            <ul>
+                <li>Observed</li>
+                <li>Measured</li>
+                <li>Directional</li>
+                <li>Decision-support</li>
+                <li>No causal claims</li>
+                <li>No claim of predicting Google's algorithm</li>
+                <li>No client-identifying details</li>
+                <li>June-only dataset limitation reported</li>
+            </ul>
+        </section>
+
+    </main>
 
 
     <footer>
+        <p>
+            Capstone Report — Content Opportunity Scoring
+        </p>
 
-        <div class="container footer-inner">
-
-            <span>
-                FlyRank ML Internship · Content Opportunity Scoring
-            </span>
-
-            <span>
-                June 2026 Dataset
-            </span>
-
-        </div>
-
+        <p>
+            FlyRank ML Internship · 2026
+        </p>
     </footer>
 
-</main>
+</div>
 
 </body>
 </html>
