@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI-Powered Content Opportunity Scoring Engine | FlyRank</title>
+    <title>Content Opportunity Scoring — FlyRank Research Paper</title>
 
     <meta
         name="description"
-        content="A research paper on rule-based content opportunity scoring using FlyRank search intelligence data."
+        content="A research paper on transparent content opportunity scoring using search visibility, CTR, search position, and engagement signals."
     >
 
     <link rel="stylesheet" href="style.css">
@@ -16,776 +16,1226 @@
 
 <body>
 
-    <!-- Navigation -->
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="#" class="brand">
-                <span class="brand-mark">F</span>
-                <span>FlyRank Research</span>
-            </a>
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-            <nav>
-                <a href="#problem">Problem</a>
-                <a href="#data">Data</a>
-                <a href="#baseline">Baseline</a>
-                <a href="#model">Method</a>
-                <a href="#evaluation">Evaluation</a>
-                <a href="#interpretation">Interpretation</a>
-                <a href="#recommendation">Recommendations</a>
-            </nav>
+<header class="site-header">
+    <div class="nav-container">
+
+        <a href="#top" class="brand">
+            <span class="brand-mark">FO</span>
+            <span>FlyRank Research</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="#problem">Problem</a>
+            <a href="#data">Data</a>
+            <a href="#methodology">Method</a>
+            <a href="#results">Results</a>
+            <a href="#recommendations">Recommendations</a>
+            <a href="#reproducibility">Reproducibility</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main id="top">
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+    <div class="container">
+
+        <div class="eyebrow">
+            MACHINE LEARNING RESEARCH · CONTENT INTELLIGENCE
         </div>
-    </header>
 
-
-    <!-- Hero -->
-    <main>
-
-        <section class="hero">
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    FLYRANK ML INTERNSHIP · SEARCH INTELLIGENCE
-                </div>
-
-                <h1>
-                    AI-Powered Content
-                    <span>Opportunity Scoring Engine</span>
-                </h1>
-
-                <p class="hero-description">
-                    A decision-support framework for prioritizing content pages
-                    for refresh and optimization using search visibility and
-                    engagement signals.
-                </p>
-
-                <div class="metadata">
-                    <div>
-                        <span>AUTHOR</span>
-                        <strong>Rohith M</strong>
-                    </div>
-
-                    <div>
-                        <span>LANE</span>
-                        <strong>Refresh / Content Opportunity Scoring</strong>
-                    </div>
-
-                    <div>
-                        <span>APPROACH</span>
-                        <strong>Rule-based scoring + ML validation</strong>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- Abstract -->
-        <section class="section abstract-section">
-            <div class="section-label">ABSTRACT</div>
-
-            <h2>Research question → method → result</h2>
-
-            <div class="abstract-box">
-                <p>
-                    <strong>Question:</strong>
-                    Which content pages should be prioritized for refresh based
-                    on measurable search visibility and engagement signals?
-                </p>
-
-                <p>
-                    <strong>Method:</strong>
-                    The analysis combines Google Search Console and Google
-                    Analytics 4 signals into a repeatable opportunity-scoring
-                    framework and evaluates the resulting ranking against a
-                    transparent baseline.
-                </p>
-
-                <p>
-                    <strong>Result:</strong>
-                    The analysis identifies pages with combinations of search
-                    visibility, click-through behavior, ranking position, and
-                    engagement that warrant review.
-                </p>
-
-                <p>
-                    The output is intended as a practical prioritization system
-                    rather than a prediction of future Google rankings.
-                </p>
-
-                <p>
-                    The findings are therefore interpreted as observed,
-                    directional, and decision-support evidence.
-                </p>
-            </div>
-        </section>
-
-
-        <!-- 1. Problem -->
-        <section class="section" id="problem">
-
-            <div class="section-label">01 · PROBLEM FRAMING</div>
-
-            <h2>Which pages deserve attention first?</h2>
-
-            <p class="lead">
-                Content teams cannot manually review every page with equal
-                priority. This project turns measurable search and engagement
-                signals into a ranked review queue.
-            </p>
-
-            <div class="card-grid">
-
-                <article class="info-card">
-                    <span class="card-number">01</span>
-                    <h3>Decision</h3>
-                    <p>
-                        Which content pages should be prioritized for refresh
-                        and optimization?
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-number">02</span>
-                    <h3>Unit of analysis</h3>
-                    <p>
-                        One content page's observed search and engagement
-                        performance.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-number">03</span>
-                    <h3>Output</h3>
-                    <p>
-                        A ranked opportunity score, reason code, and recommended
-                        action.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <span class="card-number">04</span>
-                    <h3>Human action</h3>
-                    <p>
-                        Editors and SEO teams review high-priority pages and
-                        decide whether to refresh, optimize, or monitor them.
-                    </p>
-                </article>
-
-            </div>
-
-            <div class="callout warning">
-                <strong>Cost of a wrong call</strong>
-                <p>
-                    Prioritizing a low-opportunity page can waste editorial and
-                    SEO resources while higher-value pages remain unreviewed.
-                    The scoring system therefore supports prioritization rather
-                    than replacing human review.
-                </p>
-            </div>
-
-        </section>
-
-
-        <!-- 2. Data -->
-        <section class="section dark-section" id="data">
-
-            <div class="section-label">02 · DATA SAFETY</div>
-
-            <h2>Public-safe search intelligence</h2>
-
-            <div class="data-overview">
-
-                <div class="stat">
-                    <strong>50,000</strong>
-                    <span>sample records</span>
-                </div>
-
-                <div class="stat">
-                    <strong>GSC</strong>
-                    <span>search visibility signals</span>
-                </div>
-
-                <div class="stat">
-                    <strong>GA4</strong>
-                    <span>engagement signals</span>
-                </div>
-
-                <div class="stat">
-                    <strong>AI</strong>
-                    <span>referral signals</span>
-                </div>
-
-            </div>
-
-            <div class="data-card">
-
-                <h3>Dataset</h3>
-
-                <p>
-                    FlyRank Internship Warehouse,
-                    <code>fact_content_daily_performance_sample</code>.
-                </p>
-
-                <h3>Used signals</h3>
-
-                <div class="tag-list">
-                    <span>Impressions</span>
-                    <span>Clicks</span>
-                    <span>CTR</span>
-                    <span>Average position</span>
-                    <span>Engagement</span>
-                    <span>AI referral sessions</span>
-                </div>
-
-                <h3>Excluded from modeling</h3>
-
-                <ul>
-                    <li>Client-identifying information</li>
-                    <li>Private queries</li>
-                    <li>Domains and private URLs</li>
-                    <li>Pseudonymous identifiers as predictive features</li>
-                    <li>Label-derived future information</li>
-                </ul>
-
-                <h3>Leakage risks considered</h3>
-
-                <p>
-                    Fields such as <code>trend_direction</code> and
-                    <code>trend_pct</code> were treated as label-derived or
-                    potentially future-looking information and were not used
-                    as predictive features where they could leak the target.
-                    Pseudonymous IDs were treated only as grouping information
-                    where required for validation.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- 3. Baseline -->
-        <section class="section" id="baseline">
-
-            <div class="section-label">03 · BASELINE</div>
-
-            <h2>A transparent rule comes first</h2>
-
-            <p class="lead">
-                Before using a learned model, a simple and interpretable
-                baseline establishes what a practical hand-written rule can
-                achieve.
-            </p>
-
-            <div class="rule-box">
-
-                <div class="rule-header">
-                    <span>BASELINE RULE</span>
-                    <span>DECISION SUPPORT</span>
-                </div>
-
-                <h3>
-                    High visibility + under-captured clicks
-                </h3>
-
-                <p>
-                    Pages showing meaningful search visibility combined with
-                    comparatively weak click-through behavior receive a higher
-                    review priority.
-                </p>
-
-                <div class="rule-flow">
-                    <div>Visibility signal</div>
-                    <div class="arrow">+</div>
-                    <div>CTR signal</div>
-                    <div class="arrow">→</div>
-                    <div>Review priority</div>
-                </div>
-
-            </div>
-
-            <div class="two-column">
-
-                <div>
-                    <h3>Why this baseline?</h3>
-                    <p>
-                        The rule is simple enough for an editor to understand
-                        and audit. It provides a meaningful benchmark for
-                        determining whether a more complex model adds useful
-                        ranking power.
-                    </p>
-                </div>
-
-                <div>
-                    <h3>What it cannot do</h3>
-                    <p>
-                        The baseline does not establish that changing a page
-                        will cause a ranking improvement. It only identifies
-                        pages whose observed signals make them worth reviewing.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- 4. Model -->
-        <section class="section dark-section" id="model">
-
-            <div class="section-label">04 · MODEL / ANALYSIS</div>
-
-            <h2>From signals to opportunity</h2>
-
-            <p class="lead">
-                The scoring framework combines multiple observable signals
-                rather than relying on a single threshold.
-            </p>
-
-            <div class="feature-grid">
-
-                <div class="feature">
-                    <span>01</span>
-                    <h3>Impressions</h3>
-                    <p>
-                        Measures observed search visibility and helps identify
-                        pages with meaningful exposure.
-                    </p>
-                </div>
-
-                <div class="feature">
-                    <span>02</span>
-                    <h3>CTR</h3>
-                    <p>
-                        Measures how efficiently visible pages capture clicks.
-                    </p>
-                </div>
-
-                <div class="feature">
-                    <span>03</span>
-                    <h3>Average position</h3>
-                    <p>
-                        Provides search-ranking context for interpreting
-                        click-through behavior.
-                    </p>
-                </div>
-
-                <div class="feature">
-                    <span>04</span>
-                    <h3>Engagement</h3>
-                    <p>
-                        Adds a post-click quality signal to the prioritization
-                        framework.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="method-card">
-
-                <h3>Target / proxy definition</h3>
-
-                <p>
-                    The target or proxy represents whether a page warrants
-                    refresh review based on an observed performance condition,
-                    rather than attempting to predict Google's ranking system.
-                </p>
-
-                <h3>Feature discipline</h3>
-
-                <p>
-                    Future-looking and label-derived variables are excluded
-                    where they could leak information about the outcome.
-                    Features are selected because they are available at the
-                    point where a content-prioritization decision would be
-                    made.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- 5. Evaluation -->
-        <section class="section" id="evaluation">
-
-            <div class="section-label">05 · EVALUATION</div>
-
-            <h2>Does the model beat the baseline?</h2>
-
-            <p class="lead">
-                Evaluation should compare the baseline and model using the
-                same split and the same metric. A high metric is only useful
-                when interpreted against the task's base rate.
-            </p>
-
-            <div class="metrics">
-
-                <div class="metric-card">
-                    <span>BASELINE</span>
-                    <strong>—</strong>
-                    <small>Precision@K</small>
-                </div>
-
-                <div class="metric-card highlight">
-                    <span>MODEL</span>
-                    <strong>—</strong>
-                    <small>Precision@K</small>
-                </div>
-
-                <div class="metric-card">
-                    <span>BASE RATE</span>
-                    <strong>—</strong>
-                    <small>Majority class</small>
-                </div>
-
-                <div class="metric-card">
-                    <span>LIFT</span>
-                    <strong>—</strong>
-                    <small>Over baseline</small>
-                </div>
-
-            </div>
-
-            <div class="evaluation-table">
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Metric</th>
-                            <th>Result</th>
-                            <th>Interpretation</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Hand-written baseline</td>
-                            <td>Precision@K</td>
-                            <td>—</td>
-                            <td>Transparent benchmark</td>
-                        </tr>
-
-                        <tr>
-                            <td>Selected model</td>
-                            <td>Precision@K</td>
-                            <td>—</td>
-                            <td>Compared on the same split</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
-            <div class="callout">
-                <strong>Validation design</strong>
-                <p>
-                    The evaluation uses a grouped validation strategy where
-                    appropriate so that pages belonging to the same client are
-                    not allowed to appear in both training and evaluation data.
-                    This reduces the risk of overly optimistic performance from
-                    client-specific patterns.
-                </p>
-            </div>
-
-            <h3>Error analysis</h3>
-
-            <p>
-                The highest-ranked false positives are treated as an important
-                part of the evaluation. A page can receive a high score while
-                still being a poor recommendation because of sparse signals,
-                unusual content behavior, or limitations in the available
-                features. These cases should be reviewed rather than hidden.
-            </p>
-
-        </section>
-
-
-        <!-- 6. Interpretation -->
-        <section class="section dark-section" id="interpretation">
-
-            <div class="section-label">06 · INTERPRETATION</div>
-
-            <h2>What the signals actually tell us</h2>
-
-            <div class="interpretation-grid">
-
-                <article>
-                    <span class="insight-number">01</span>
-                    <h3>Visibility is not the same as clicks</h3>
-                    <p>
-                        Pages can receive search impressions without converting
-                        that visibility into equivalent click activity.
-                    </p>
-                </article>
-
-                <article>
-                    <span class="insight-number">02</span>
-                    <h3>Position changes the CTR context</h3>
-                    <p>
-                        Click-through behavior varies substantially across
-                        search-position groups, so CTR should not be interpreted
-                        without visibility and position context.
-                    </p>
-                </article>
-
-                <article>
-                    <span class="insight-number">03</span>
-                    <h3>Content length is not automatically the answer</h3>
-                    <p>
-                        Observed word-count differences alone should not be
-                        treated as evidence that making content longer will
-                        improve performance.
-                    </p>
-                </article>
-
-            </div>
-
-            <div class="negative-result">
-
-                <span>NEGATIVE RESULT</span>
-
-                <p>
-                    A weak or absent relationship between two signals is still
-                    useful. It prevents the scoring engine from assigning
-                    importance to a feature simply because it sounds intuitively
-                    relevant.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- 7. Recommendation -->
-        <section class="section" id="recommendation">
-
-            <div class="section-label">07 · RECOMMENDATION</div>
-
-            <h2>The action playbook</h2>
-
-            <p class="lead">
-                The ranking is designed to help an editor decide what to
-                investigate first, not to automate the final editorial decision.
-            </p>
-
-            <div class="recommendations">
-
-                <article class="recommendation">
-
-                    <div class="rank">01</div>
-
-                    <div>
-                        <span class="priority high">HIGH PRIORITY</span>
-
-                        <h3>Review high-visibility, low-CTR pages</h3>
-
-                        <p>
-                            Inspect title tags, meta descriptions, search intent
-                            alignment, and page presentation.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">02</div>
-
-                    <div>
-                        <span class="priority medium">MEDIUM PRIORITY</span>
-
-                        <h3>Review pages with weak search position</h3>
-
-                        <p>
-                            Examine content relevance, internal linking,
-                            topical coverage, and competitive context.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">03</div>
-
-                    <div>
-                        <span class="priority medium">MEDIUM PRIORITY</span>
-
-                        <h3>Protect strong engagement pages</h3>
-
-                        <p>
-                            Pages with strong observed engagement may warrant
-                            monitoring before aggressive changes are made.
-                        </p>
-                    </div>
-
-                </article>
-
-
-                <article class="recommendation">
-
-                    <div class="rank">04</div>
-
-                    <div>
-                        <span class="priority low">MONITOR</span>
-
-                        <h3>Do not refresh solely because of one weak signal</h3>
-
-                        <p>
-                            Use multiple signals and human review before
-                            committing editorial resources.
-                        </p>
-                    </div>
-
-                </article>
-
-            </div>
-
-            <div class="confidence-box">
-
-                <h3>Confidence & limits</h3>
-
-                <p>
-                    These recommendations are directional and intended for
-                    decision support. They identify pages worth reviewing based
-                    on observed data; they do not establish that a specific
-                    refresh will cause improved rankings or traffic.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- 8. Reproducibility -->
-        <section class="section dark-section" id="reproducibility">
-
-            <div class="section-label">08 · REPRODUCIBILITY</div>
-
-            <h2>Designed to be rerun</h2>
-
-            <div class="repro-grid">
-
-                <div class="repro-card">
-                    <span>REPOSITORY</span>
-                    <h3>FlyRank-Intern</h3>
-                    <p>
-                        Source notebooks, analysis, outputs, and paper assets
-                        are maintained in the public repository.
-                    </p>
-
-                    <a
-                        href="https://github.com/Rohith84/Flyrank-Intern"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        View repository →
-                    </a>
-                </div>
-
-
-                <div class="repro-card">
-                    <span>NOTEBOOKS</span>
-                    <h3>Weekly ML workflow</h3>
-                    <p>
-                        Research framing, task framing, data contract, leakage
-                        checks, baseline, modeling, validation, and action
-                        playbook notebooks are stored under
-                        <code>work/notebooks/</code>.
-                    </p>
-                </div>
-
-
-                <div class="repro-card">
-                    <span>RANDOMNESS</span>
-                    <h3>Controlled experiments</h3>
-                    <p>
-                        Random seeds should be fixed wherever randomized model
-                        training or splitting is used.
-                    </p>
-                </div>
-
-
-                <div class="repro-card">
-                    <span>ENVIRONMENT</span>
-                    <h3>Python + data tools</h3>
-                    <p>
-                        Python, Pandas, NumPy, DuckDB, and scikit-learn are used
-                        for the analysis and modeling workflow.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- Claims checklist -->
-        <section class="section checklist-section">
-
-            <div class="section-label">RESEARCH INTEGRITY</div>
-
-            <h2>Claims checklist</h2>
-
-            <div class="checklist">
-
-                <div>✓ Observed rather than causal</div>
-                <div>✓ Directional interpretation</div>
-                <div>✓ Decision-support framing</div>
-                <div>✓ No claim of predicting Google's algorithm</div>
-                <div>✓ No client-identifying information</div>
-                <div>✓ Baseline and model compared on the same evaluation design</div>
-
-            </div>
-
-        </section>
-
-
-        <!-- Acknowledgements -->
-        <section class="acknowledgements">
-
-            <div class="section-label">ACKNOWLEDGMENTS</div>
-
-            <h2>Data credit</h2>
-
-            <p>
-                Built on the FlyRank ML Internship dataset.
-            </p>
+        <h1>
+            Content Opportunity<br>
+            Scoring for Search Optimization
+        </h1>
+
+        <p class="hero-description">
+            A transparent, multi-signal ranking framework for helping content
+            teams decide which pages deserve review and optimization first.
+        </p>
+
+        <div class="hero-meta">
+            <span>FlyRank ML Internship</span>
+            <span>·</span>
+            <span>June 2026 warehouse release</span>
+            <span>·</span>
+            <span>Decision-support analysis</span>
+        </div>
+
+        <div class="hero-actions">
+            <a href="#results" class="button button-primary">
+                View results
+            </a>
 
             <a
-                href="https://flyrank.ai"
+                href="https://github.com/Rohith84/Flyrank-Intern"
+                class="button button-secondary"
                 target="_blank"
-                rel="noopener"
-                class="flyrank-link"
+                rel="noopener noreferrer"
             >
-                FlyRank AI →
+                View repository
             </a>
+        </div>
 
-        </section>
+    </div>
+</section>
 
-    </main>
+
+<!-- =========================
+     ABSTRACT
+========================= -->
+
+<section class="section abstract-section">
+    <div class="container narrow">
+
+        <div class="section-label">ABSTRACT</div>
+
+        <h2>Question → Method → Result</h2>
+
+        <div class="abstract-box">
+
+            <p>
+                <strong>Question.</strong>
+                Which content pages should be prioritized for review when a
+                content team has more pages than it can refresh at once?
+            </p>
+
+            <p>
+                <strong>Method.</strong>
+                I developed a transparent Opportunity Score combining
+                impressions, click-through rate, average search position,
+                and engagement per session, and compared its ranking with
+                a simpler Week-4 baseline using the same client-grouped
+                evaluation population.
+            </p>
+
+            <p>
+                <strong>Data.</strong>
+                The analysis used the June 2026 FlyRank internship warehouse
+                release, containing 11,694,072 raw records that were
+                aggregated into 409,205 page-level observations across
+                65 clients.
+            </p>
+
+            <p>
+                <strong>Result.</strong>
+                The Opportunity Score produced a substantially different
+                ranking from the baseline: none of the baseline's top 50
+                pages appeared in the Opportunity Score's top 50.
+            </p>
+
+            <p>
+                <strong>Interpretation.</strong>
+                This is evidence of a different prioritization strategy,
+                not evidence that the Opportunity Score predicts future
+                performance better, because the available release contains
+                only June 2026 and therefore has no future outcome window.
+            </p>
+
+        </div>
+
+    </div>
+</section>
 
 
-    <!-- Footer -->
-    <footer>
+<!-- =========================
+     PROBLEM
+========================= -->
 
-        <div class="footer-content">
+<section id="problem" class="section">
+    <div class="container">
 
+        <div class="section-label">01 · PROBLEM FRAMING</div>
+
+        <div class="section-heading">
             <div>
-                <strong>AI-Powered Content Opportunity Scoring Engine</strong>
-                <span>FlyRank ML Internship</span>
+                <h2>Which pages deserve attention first?</h2>
             </div>
 
+            <p>
+                Content teams cannot manually review every page at the same
+                time. The practical decision is therefore not simply whether
+                a page performs well or poorly, but which pages should enter
+                the refresh queue first.
+            </p>
+        </div>
+
+        <div class="problem-grid">
+
+            <article class="info-card">
+                <span class="card-number">01</span>
+                <h3>Decision</h3>
+                <p>
+                    Which content pages should be prioritized for
+                    optimization review?
+                </p>
+            </article>
+
+            <article class="info-card">
+                <span class="card-number">02</span>
+                <h3>Output</h3>
+                <p>
+                    A ranked Opportunity Score that orders pages for
+                    human review.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <span class="card-number">03</span>
+                <h3>Action</h3>
+                <p>
+                    Editors can investigate titles, content, internal
+                    links, CTR opportunities, and search positioning.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <span class="card-number">04</span>
+                <h3>Cost of error</h3>
+                <p>
+                    A poor recommendation can waste optimization effort
+                    while higher-value pages remain unattended.
+                </p>
+            </article>
+
+        </div>
+
+        <div class="callout">
+            <div class="callout-icon">↗</div>
+
             <div>
-                <span>Rohith M · 2026</span>
+                <strong>Why data helps</strong>
+                <p>
+                    Search impressions, clicks, CTR, search position and
+                    engagement provide measurable signals for prioritization
+                    instead of relying entirely on manual selection.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     DATA
+========================= -->
+
+<section id="data" class="section section-dark">
+    <div class="container">
+
+        <div class="section-label">02 · DATA</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>The June 2026 warehouse release</h2>
+            </div>
+
+            <p>
+                The analysis uses a public-safe, pseudonymized FlyRank
+                internship warehouse release. Client hashes and content
+                hashes are used only for grouping and page identification,
+                never as predictive features.
+            </p>
+        </div>
+
+        <div class="stat-grid">
+
+            <div class="stat-card">
+                <span class="stat-value">11.69M</span>
+                <span class="stat-label">Raw records</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-value">409K</span>
+                <span class="stat-label">Page-level observations</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-value">65</span>
+                <span class="stat-label">Clients</span>
+            </div>
+
+            <div class="stat-card">
+                <span class="stat-value">30</span>
+                <span class="stat-label">Days in release</span>
             </div>
 
         </div>
 
-    </footer>
+        <div class="data-grid">
+
+            <div class="data-panel">
+                <h3>Dataset</h3>
+
+                <dl>
+                    <div>
+                        <dt>Dataset</dt>
+                        <dd>FlyRank Internship Warehouse</dd>
+                    </div>
+
+                    <div>
+                        <dt>Table</dt>
+                        <dd>fact_content_daily_performance_sample</dd>
+                    </div>
+
+                    <div>
+                        <dt>Date window</dt>
+                        <dd>2026-06-01 → 2026-06-30</dd>
+                    </div>
+
+                    <div>
+                        <dt>Raw rows</dt>
+                        <dd>11,694,072</dd>
+                    </div>
+
+                    <div>
+                        <dt>Page-level rows</dt>
+                        <dd>409,205</dd>
+                    </div>
+                </dl>
+            </div>
+
+
+            <div class="data-panel">
+                <h3>Primary signals</h3>
+
+                <ul class="signal-list">
+                    <li>GSC impressions</li>
+                    <li>GSC clicks</li>
+                    <li>CTR</li>
+                    <li>Average search position</li>
+                    <li>GA4 sessions</li>
+                    <li>GA4 engaged sessions</li>
+                    <li>Total engagement time</li>
+                    <li>AI referral sessions</li>
+                </ul>
+            </div>
+
+
+            <div class="data-panel">
+                <h3>Deliberate exclusions</h3>
+
+                <ul class="signal-list">
+                    <li>Client identifiers as model features</li>
+                    <li>Content identifiers as model features</li>
+                    <li>Future performance windows</li>
+                    <li>Label-derived fields</li>
+                    <li>Private URLs or queries</li>
+                    <li>Client-identifying information</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="warning-box">
+            <strong>Important data limitation</strong>
+
+            <p>
+                The available warehouse release contains only June 2026.
+                There is therefore no July or later observation available
+                for constructing a future decline label. The analysis does
+                not invent one.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     METHODOLOGY
+========================= -->
+
+<section id="methodology" class="section">
+    <div class="container">
+
+        <div class="section-label">03 · METHODOLOGY</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>A transparent score, not a black box</h2>
+            </div>
+
+            <p>
+                The project uses weighted scoring and ranking rather than
+                supervised prediction. The goal is to create a readable
+                prioritization mechanism that an editor can inspect.
+            </p>
+        </div>
+
+        <div class="method-layout">
+
+            <div class="method-card main-method">
+                <span class="method-tag">OPPORTUNITY SCORE</span>
+
+                <div class="formula">
+                    Score =
+                    <span>0.35 × Visibility</span>
+                    +
+                    <span>0.30 × CTR Opportunity</span>
+                    +
+                    <span>0.20 × Position Opportunity</span>
+                    +
+                    <span>0.15 × Engagement Opportunity</span>
+                </div>
+
+                <p>
+                    Each component is normalized using the training-group
+                    range before the weighted score is calculated.
+                </p>
+            </div>
+
+
+            <div class="weight-card">
+                <div class="weight-row">
+                    <span>Impressions</span>
+                    <strong>35%</strong>
+                </div>
+
+                <div class="progress">
+                    <span style="width:35%"></span>
+                </div>
+
+                <div class="weight-row">
+                    <span>CTR</span>
+                    <strong>30%</strong>
+                </div>
+
+                <div class="progress">
+                    <span style="width:30%"></span>
+                </div>
+
+                <div class="weight-row">
+                    <span>Position</span>
+                    <strong>20%</strong>
+                </div>
+
+                <div class="progress">
+                    <span style="width:20%"></span>
+                </div>
+
+                <div class="weight-row">
+                    <span>Engagement</span>
+                    <strong>15%</strong>
+                </div>
+
+                <div class="progress">
+                    <span style="width:15%"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="validation-section">
+
+            <h3>Validation design</h3>
+
+            <div class="validation-grid">
+
+                <div>
+                    <span class="validation-number">52</span>
+                    <span class="validation-label">Train clients</span>
+                </div>
+
+                <div>
+                    <span class="validation-number">13</span>
+                    <span class="validation-label">Test clients</span>
+                </div>
+
+                <div>
+                    <span class="validation-number">0</span>
+                    <span class="validation-label">Client overlap</span>
+                </div>
+
+                <div>
+                    <span class="validation-number">80/20</span>
+                    <span class="validation-label">Grouped split</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="method-notes">
+
+            <div>
+                <h3>Leakage controls</h3>
+                <p>
+                    Client and content identifiers were not used as features.
+                    No future outcome was available or introduced. Fields
+                    such as <code>trend_direction</code> and
+                    <code>trend_pct</code> were not used because they are
+                    absent from this warehouse release.
+                </p>
+            </div>
+
+            <div>
+                <h3>Unit of analysis</h3>
+                <p>
+                    The raw daily performance records were aggregated into
+                    one observation per client-content pair for the June
+                    observation window.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     BASELINE
+========================= -->
+
+<section class="section section-light">
+    <div class="container">
+
+        <div class="section-label">04 · BASELINE</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>The simple rule we started with</h2>
+            </div>
+
+            <p>
+                The Week-4 baseline is intentionally transparent. It uses
+                high impressions and low CTR to identify pages for review.
+            </p>
+        </div>
+
+        <div class="comparison-card">
+
+            <div class="comparison-column">
+                <span class="comparison-label">W04 BASELINE</span>
+
+                <h3>Two-signal rule</h3>
+
+                <ul>
+                    <li>High impressions</li>
+                    <li>Low CTR</li>
+                </ul>
+
+                <div class="threshold">
+                    <span>High-impression threshold</span>
+                    <strong>524</strong>
+                </div>
+
+                <div class="threshold">
+                    <span>Low-CTR threshold</span>
+                    <strong>0.0</strong>
+                </div>
+            </div>
+
+
+            <div class="comparison-divider">
+                VS
+            </div>
+
+
+            <div class="comparison-column featured">
+                <span class="comparison-label">W05 METHOD</span>
+
+                <h3>Multi-signal score</h3>
+
+                <ul>
+                    <li>Impressions</li>
+                    <li>CTR</li>
+                    <li>Average position</li>
+                    <li>Engagement per session</li>
+                </ul>
+
+                <div class="threshold">
+                    <span>Weighted signals</span>
+                    <strong>4</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="insight-box">
+            <strong>Baseline observation</strong>
+
+            <p>
+                The low-CTR threshold was measured as 0.0 because a large
+                share of pages had zero observed clicks relative to
+                impressions. This makes the baseline relatively coarse and
+                is an important limitation when interpreting the comparison.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section id="results" class="section">
+    <div class="container">
+
+        <div class="section-label">05 · RESULTS</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>Two ranking strategies, very different queues</h2>
+            </div>
+
+            <p>
+                The evaluation does not claim predictive superiority.
+                Instead, it measures how differently the two approaches
+                prioritize the same held-out page population.
+            </p>
+        </div>
+
+
+        <!-- Result metrics -->
+
+        <div class="result-grid">
+
+            <div class="result-card">
+                <span class="result-value">0</span>
+                <span class="result-label">Top-50 pages shared</span>
+            </div>
+
+            <div class="result-card">
+                <span class="result-value">50</span>
+                <span class="result-label">Opportunity-only pages</span>
+            </div>
+
+            <div class="result-card">
+                <span class="result-value">50</span>
+                <span class="result-label">Baseline-only pages</span>
+            </div>
+
+        </div>
+
+
+        <!-- Chart -->
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <span class="chart-kicker">TOP-50 COMPOSITION</span>
+                    <h3>Overlap between ranking strategies</h3>
+                </div>
+
+                <span class="chart-note">
+                    Same client-grouped evaluation population
+                </span>
+            </div>
+
+            <div class="bar-chart">
+
+                <div class="bar-row">
+                    <span class="bar-label">Shared pages</span>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:0%"
+                        ></div>
+                    </div>
+
+                    <strong>0</strong>
+                </div>
+
+
+                <div class="bar-row">
+                    <span class="bar-label">Opportunity only</span>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill"
+                            style="width:100%"
+                        ></div>
+                    </div>
+
+                    <strong>50</strong>
+                </div>
+
+
+                <div class="bar-row">
+                    <span class="bar-label">Baseline only</span>
+
+                    <div class="bar-track">
+                        <div
+                            class="bar-fill secondary"
+                            style="width:100%"
+                        ></div>
+                    </div>
+
+                    <strong>50</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Aggregation chart -->
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <span class="chart-kicker">DATA REDUCTION</span>
+                    <h3>From warehouse rows to page-level analysis</h3>
+                </div>
+            </div>
+
+            <div class="big-chart">
+
+                <div class="big-bar">
+                    <div class="big-bar-label">
+                        <span>Raw warehouse records</span>
+                        <strong>11,694,072</strong>
+                    </div>
+
+                    <div class="big-bar-track">
+                        <div
+                            class="big-bar-fill raw"
+                            style="width:100%"
+                        ></div>
+                    </div>
+                </div>
+
+
+                <div class="big-bar">
+                    <div class="big-bar-label">
+                        <span>Page-level observations</span>
+                        <strong>409,205</strong>
+                    </div>
+
+                    <div class="big-bar-track">
+                        <div
+                            class="big-bar-fill"
+                            style="width:3.5%"
+                        ></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="chart-caption">
+                Daily warehouse records were aggregated by client and
+                content identifier for the June observation window.
+            </p>
+
+        </div>
+
+
+        <!-- Results table -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <span class="chart-kicker">OBSERVED RESULTS</span>
+                <h3>What the comparison actually tells us</h3>
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Measure</th>
+                        <th>Observed result</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Top-50 overlap</td>
+                        <td><strong>0 / 50</strong></td>
+                        <td>
+                            The two strategies prioritize completely
+                            different pages at the top of the queue.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Opportunity-only pages</td>
+                        <td><strong>50</strong></td>
+                        <td>
+                            The multi-signal score surfaces pages not
+                            selected by the baseline.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Future validation</td>
+                        <td><strong>Unavailable</strong></td>
+                        <td>
+                            Only June 2026 is available, so future decline
+                            cannot be measured.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     INTERPRETATION
+========================= -->
+
+<section class="section section-dark">
+    <div class="container">
+
+        <div class="section-label">06 · INTERPRETATION & LIMITATIONS</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>What the score gets wrong</h2>
+            </div>
+
+            <p>
+                A useful ranking system should expose its weak recommendations,
+                not hide them.
+            </p>
+        </div>
+
+
+        <div class="weak-pick">
+
+            <div class="weak-pick-number">
+                01
+            </div>
+
+            <div>
+                <span class="weak-tag">WEAK RECOMMENDATION PATTERN</span>
+
+                <h3>Very low-visibility pages can rank highly</h3>
+
+                <p>
+                    Several top-ranked examples have only 1–3 impressions
+                    while having very poor average search positions.
+                    Because poor position contributes positively to the
+                    Opportunity Score, these pages can enter the queue even
+                    when their actual visibility is extremely low.
+                </p>
+
+                <p>
+                    This is a clear case where the score should not be used
+                    automatically. An editor should review the page's actual
+                    context before allocating optimization effort.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="limitations-grid">
+
+            <article>
+                <h3>01</h3>
+                <h4>No future outcome</h4>
+                <p>
+                    The June-only release cannot establish whether a page
+                    later declines or improves.
+                </p>
+            </article>
+
+            <article>
+                <h3>02</h3>
+                <h4>No causal claim</h4>
+                <p>
+                    The analysis cannot show that refreshing a page causes
+                    better search performance.
+                </p>
+            </article>
+
+            <article>
+                <h3>03</h3>
+                <h4>Manual weights</h4>
+                <p>
+                    The Opportunity Score uses manually assigned feature
+                    weights rather than learned coefficients.
+                </p>
+            </article>
+
+            <article>
+                <h3>04</h3>
+                <h4>Human review required</h4>
+                <p>
+                    The score is a prioritization aid, not an automatic
+                    content-editing decision.
+                </p>
+            </article>
+
+        </div>
+
+
+        <div class="honest-language">
+
+            <span>HONEST FRAMING</span>
+
+            <p>
+                <strong>Observed:</strong>
+                the two ranking strategies produce different queues.
+            </p>
+
+            <p>
+                <strong>Directional:</strong>
+                the multi-signal score changes which pages appear to have
+                opportunity under the defined weighting scheme.
+            </p>
+
+            <p>
+                <strong>Decision-support:</strong>
+                the ranking can help editors decide where to begin review.
+            </p>
+
+            <p>
+                <strong>Not claimed:</strong>
+                future ranking prediction, causal impact, or prediction of
+                Google's ranking algorithm.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     RECOMMENDATIONS
+========================= -->
+
+<section id="recommendations" class="section">
+    <div class="container">
+
+        <div class="section-label">07 · RANKED RECOMMENDATIONS</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>An action playbook for editors</h2>
+            </div>
+
+            <p>
+                The score should be treated as a queue for investigation,
+                not an automatic command to change content.
+            </p>
+        </div>
+
+
+        <div class="recommendation-list">
+
+            <article class="recommendation">
+
+                <div class="recommendation-rank">
+                    01
+                </div>
+
+                <div class="recommendation-content">
+                    <span>HIGH PRIORITY</span>
+
+                    <h3>Review visible pages with weak CTR</h3>
+
+                    <p>
+                        Pages with meaningful impressions but weak CTR are
+                        practical candidates for reviewing titles,
+                        descriptions, search intent alignment, and
+                        presentation.
+                    </p>
+                </div>
+
+                <div class="recommendation-action">
+                    REVIEW
+                </div>
+
+            </article>
+
+
+            <article class="recommendation">
+
+                <div class="recommendation-rank">
+                    02
+                </div>
+
+                <div class="recommendation-content">
+                    <span>HIGH PRIORITY</span>
+
+                    <h3>Investigate pages with poor search position</h3>
+
+                    <p>
+                        Pages receiving impressions while ranking far from
+                        the strongest positions can be investigated for
+                        content relevance, internal linking, and coverage.
+                    </p>
+                </div>
+
+                <div class="recommendation-action">
+                    AUDIT
+                </div>
+
+            </article>
+
+
+            <article class="recommendation">
+
+                <div class="recommendation-rank">
+                    03
+                </div>
+
+                <div class="recommendation-content">
+                    <span>MEDIUM PRIORITY</span>
+
+                    <h3>Use engagement as supporting evidence</h3>
+
+                    <p>
+                        Engagement should help contextualize the search
+                        signals rather than being treated as an independent
+                        reason to refresh a page.
+                    </p>
+                </div>
+
+                <div class="recommendation-action">
+                    CONTEXTUALIZE
+                </div>
+
+            </article>
+
+
+            <article class="recommendation">
+
+                <div class="recommendation-rank">
+                    04
+                </div>
+
+                <div class="recommendation-content">
+                    <span>CAUTION</span>
+
+                    <h3>Do not automatically prioritize zero-visibility pages</h3>
+
+                    <p>
+                        Extremely low-impression pages can receive high
+                        scores because of their poor search position.
+                        These recommendations require additional editorial
+                        validation.
+                    </p>
+                </div>
+
+                <div class="recommendation-action">
+                    VERIFY
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     REPRODUCIBILITY
+========================= -->
+
+<section id="reproducibility" class="section section-light">
+    <div class="container">
+
+        <div class="section-label">08 · REPRODUCIBILITY</div>
+
+        <div class="section-heading">
+            <div>
+                <h2>Everything needed to inspect the work</h2>
+            </div>
+
+            <p>
+                The analysis is documented through the internship notebook
+                workflow and the public project repository.
+            </p>
+        </div>
+
+
+        <div class="repro-grid">
+
+            <a
+                class="resource-card"
+                href="https://github.com/Rohith84/Flyrank-Intern"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span class="resource-type">REPOSITORY</span>
+                <h3>Flyrank-Intern</h3>
+                <p>
+                    Source repository containing assignment notebooks,
+                    capstone work, and project documentation.
+                </p>
+                <span class="resource-link">
+                    Open repository →
+                </span>
+            </a>
+
+
+            <a
+                class="resource-card"
+                href="https://github.com/Rohith84/Flyrank-Intern/blob/main/work/notebooks/w05_model.ipynb"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span class="resource-type">NOTEBOOK</span>
+                <h3>W05 Model Analysis</h3>
+                <p>
+                    Executed notebook containing the scoring methodology,
+                    grouped evaluation, ranking comparison, and
+                    interpretation.
+                </p>
+                <span class="resource-link">
+                    Open notebook →
+                </span>
+            </a>
+
+
+            <a
+                class="resource-card"
+                href="https://github.com/Rohith84/Flyrank-Intern/blob/main/work/notebooks/w04_baseline_score.ipynb"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <span class="resource-type">BASELINE</span>
+                <h3>W04 Baseline Score</h3>
+                <p>
+                    Transparent baseline rule and ranked queue used as
+                    the starting point for the comparison.
+                </p>
+                <span class="resource-link">
+                    Open baseline →
+                </span>
+            </a>
+
+        </div>
+
+
+        <div class="repro-note">
+
+            <h3>Reproduction environment</h3>
+
+            <p>
+                The notebook uses Python, Pandas, NumPy, scikit-learn,
+                Hugging Face dataset access, and a deterministic random
+                seed of 42 for the client-grouped split.
+            </p>
+
+            <p>
+                The analysis first aggregates the daily warehouse records
+                into client-content page observations, then performs an
+                80/20 client-grouped split before calculating the ranking
+                comparison.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     ACKNOWLEDGMENTS
+========================= -->
+
+<section class="acknowledgments">
+    <div class="container">
+
+        <div class="ack-grid">
+
+            <div>
+                <div class="section-label">ACKNOWLEDGMENTS</div>
+
+                <h2>
+                    Built on the FlyRank ML Internship dataset.
+                </h2>
+
+                <p>
+                    This project uses the FlyRank ML Internship dataset
+                    as its research data source. Data credit is provided
+                    as part of the research documentation.
+                </p>
+
+                <a
+                    href="https://flyrank.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flyrank-link"
+                >
+                    Visit FlyRank →
+                </a>
+            </div>
+
+
+            <div class="ack-meta">
+
+                <div>
+                    <span>AUTHOR</span>
+                    <strong>Rohith</strong>
+                </div>
+
+                <div>
+                    <span>LANE</span>
+                    <strong>Content Opportunity Scoring</strong>
+                </div>
+
+                <div>
+                    <span>RELEASE</span>
+                    <strong>June 2026</strong>
+                </div>
+
+                <div>
+                    <span>ANALYSIS TYPE</span>
+                    <strong>Decision-support ranking</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+    <div class="container">
+
+        <span>
+            FlyRank ML Internship · Content Opportunity Scoring
+        </span>
+
+        <span>
+            Observed · Directional · Decision-support
+        </span>
+
+    </div>
+</footer>
+
+</main>
 
 </body>
 </html>
