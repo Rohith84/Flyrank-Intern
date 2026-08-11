@@ -1,8 +1,3 @@
-/* =========================================
-   CAPSTONE REPORT — SIMPLE FORMAT
-   Matches the previous report formatting
-   ========================================= */
-
 * {
     box-sizing: border-box;
 }
@@ -10,48 +5,65 @@
 body {
     margin: 0;
     padding: 0;
+
     background: #ffffff;
     color: #111111;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.65;
 }
 
-/* Main report container */
+
+/* =========================================
+   MAIN REPORT
+   ========================================= */
+
 .report {
     width: 1180px;
     max-width: calc(100% - 80px);
+
     margin: 0 auto;
-    padding: 45px 0 70px 0;
+
+    padding-top: 45px;
+    padding-bottom: 70px;
 }
 
-/* =========================================
-   TITLE
-   ========================================= */
-
-h1 {
-    margin: 0 0 35px 0;
-    text-align: center;
-    font-size: 44px;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #111111;
-}
 
 /* =========================================
-   HEADER / METADATA
+   HEADER
    ========================================= */
 
 .report-header {
-    margin-bottom: 55px;
+    margin-bottom: 65px;
     padding-bottom: 35px;
+
     border-bottom: 1px solid #dddddd;
 }
 
+.report-header h1 {
+    margin: 0 0 38px 0;
+
+    text-align: center;
+
+    font-size: 44px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+/* =========================================
+   AUTHOR / LANE / REPO / DATE
+   ========================================= */
+
 .metadata {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
-    column-gap: 70px;
+
+    column-gap: 80px;
     row-gap: 12px;
 }
 
@@ -63,143 +75,6 @@ h1 {
     font-weight: 700;
 }
 
-.metadata a {
-    color: #0645ad;
-    text-decoration: underline;
-}
-
-/* =========================================
-   SECTIONS
-   ========================================= */
-
-section {
-    margin-bottom: 55px;
-}
-
-h2 {
-    margin: 0 0 28px 0;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #dddddd;
-
-    font-size: 30px;
-    line-height: 1.25;
-    font-weight: 700;
-    color: #111111;
-}
-
-h3 {
-    margin: 30px 0 14px 0;
-    font-size: 20px;
-    line-height: 1.3;
-    font-weight: 700;
-    color: #111111;
-}
-
-/* =========================================
-   PARAGRAPHS
-   ========================================= */
-
-p {
-    margin: 0 0 22px 0;
-}
-
-section > p:last-child {
-    margin-bottom: 0;
-}
-
-/* =========================================
-   LISTS
-   ========================================= */
-
-ul,
-ol {
-    margin-top: 8px;
-    margin-bottom: 24px;
-    padding-left: 28px;
-}
-
-li {
-    margin-bottom: 8px;
-}
-
-/* =========================================
-   TABLES
-   ========================================= */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0 30px 0;
-    font-size: 15px;
-}
-
-th,
-td {
-    border: 1px solid #d3d3d3;
-    padding: 13px 14px;
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    background: #f5f5f5;
-    font-weight: 700;
-}
-
-tr:nth-child(even) td {
-    background: #fafafa;
-}
-
-/* =========================================
-   CODE
-   ========================================= */
-
-code {
-    padding: 2px 5px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    background: #f4f4f4;
-
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 14px;
-}
-
-pre {
-    margin: 20px 0 28px 0;
-    padding: 16px;
-    overflow-x: auto;
-
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    background: #f6f6f6;
-
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-/* =========================================
-   BLOCKQUOTE
-   ========================================= */
-
-blockquote {
-    margin: 25px 0;
-    padding: 10px 20px;
-    border-left: 3px solid #cccccc;
-    color: #333333;
-}
-
-/* =========================================
-   STRONG / EMPHASIS
-   ========================================= */
-
-strong {
-    font-weight: 700;
-}
-
-em {
-    font-style: italic;
-}
 
 /* =========================================
    LINKS
@@ -214,64 +89,224 @@ a:hover {
     color: #0645ad;
 }
 
+
 /* =========================================
-   REPORT FOOTER
+   SECTIONS
+   ========================================= */
+
+section {
+    margin-bottom: 55px;
+}
+
+
+/* =========================================
+   SECTION HEADINGS
+   ========================================= */
+
+h2 {
+    margin: 0 0 28px 0;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #dddddd;
+
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 14px;
+
+    font-size: 19px;
+    line-height: 1.3;
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+/* =========================================
+   PARAGRAPHS
+   ========================================= */
+
+p {
+    margin-top: 0;
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   LISTS
+   ========================================= */
+
+ul,
+ol {
+    margin-top: 10px;
+    margin-bottom: 25px;
+
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 7px;
+}
+
+
+/* =========================================
+   TABLES
+   ========================================= */
+
+table {
+    width: 100%;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    border-collapse: collapse;
+
+    font-size: 15px;
+}
+
+th,
+td {
+    border: 1px solid #cccccc;
+
+    padding: 12px 14px;
+
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #f5f5f5;
+
+    font-weight: 700;
+}
+
+td {
+    background: #ffffff;
+}
+
+
+/* =========================================
+   CODE
+   ========================================= */
+
+code {
+    padding: 2px 5px;
+
+    background: #f1f1f1;
+
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+}
+
+
+pre {
+    margin-top: 20px;
+    margin-bottom: 28px;
+
+    padding: 15px;
+
+    overflow-x: auto;
+
+    background: #f5f5f5;
+
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+pre code {
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+}
+
+
+/* =========================================
+   FOOTER
    ========================================= */
 
 footer {
-    margin-top: 60px;
+    margin-top: 65px;
     padding-top: 25px;
+
     border-top: 1px solid #dddddd;
 
     text-align: center;
+
     color: #555555;
+
     font-size: 14px;
 }
+
+footer p {
+    margin-bottom: 5px;
+}
+
 
 /* =========================================
    RESPONSIVE
    ========================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
     .report {
         width: auto;
-        max-width: calc(100% - 40px);
+        max-width: calc(100% - 50px);
+    }
+
+    .report-header h1 {
+        font-size: 38px;
+    }
+
+    .metadata {
+        column-gap: 40px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .report {
+        max-width: calc(100% - 30px);
+
         padding-top: 30px;
     }
 
-    h1 {
-        font-size: 34px;
+    .report-header h1 {
+        text-align: left;
+
+        font-size: 30px;
     }
 
     .metadata {
         grid-template-columns: 1fr;
+
         row-gap: 10px;
     }
 
     h2 {
-        font-size: 26px;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .report {
-        max-width: calc(100% - 28px);
-        padding-top: 20px;
+        font-size: 25px;
     }
 
-    body {
-        font-size: 15px;
-    }
-
-    h1 {
-        font-size: 28px;
-        text-align: left;
-    }
-
-    h2 {
-        font-size: 23px;
+    h3 {
+        font-size: 18px;
     }
 
     table {
@@ -282,4 +317,5 @@ footer {
     td {
         padding: 9px;
     }
+
 }
