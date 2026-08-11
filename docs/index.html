@@ -15,16 +15,24 @@
         <h1>Capstone Report — Content Opportunity Scoring</h1>
 
         <p><strong>Author:</strong> Rohith</p>
-        <p><strong>Lane:</strong> Refresh / Content Opportunity Scoring</p>
-        <p><strong>Repo:</strong>
+
+        <p>
+            <strong>Lane:</strong>
+            Refresh / Content Opportunity Scoring
+        </p>
+
+        <p>
+            <strong>Repo:</strong>
             <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
                 GitHub Repository
             </a>
         </p>
+
         <p><strong>Date:</strong> 2026-08-10</p>
     </header>
 
 
+    <!-- 1. Problem framing -->
     <section>
         <h2>1. Problem framing</h2>
 
@@ -66,6 +74,7 @@
     </section>
 
 
+    <!-- 2. Data safety -->
     <section>
         <h2>2. Data safety</h2>
 
@@ -122,14 +131,19 @@
             </tbody>
         </table>
 
+
         <h3>Primary signals</h3>
 
         <ul>
             <li><code>gsc_impressions</code></li>
             <li><code>ctr</code></li>
             <li><code>gsc_avg_position</code></li>
-            <li><code>ga4_engaged_sessions / ga4_sessions</code> as the engagement-rate signal</li>
+            <li>
+                <code>engagement_per_session</code>
+                (<code>ga4_total_engagement_sec / ga4_sessions</code>)
+            </li>
         </ul>
+
 
         <h3>Excluded information</h3>
 
@@ -157,6 +171,7 @@
     </section>
 
 
+    <!-- 3. Baseline -->
     <section>
         <h2>3. Baseline</h2>
 
@@ -250,6 +265,7 @@
     </section>
 
 
+    <!-- 4. Model / analysis -->
     <section>
         <h2>4. Model / analysis</h2>
 
@@ -269,8 +285,15 @@
             <li><code>gsc_impressions</code></li>
             <li><code>ctr</code></li>
             <li><code>gsc_avg_position</code></li>
-            <li><code>ga4_engaged_sessions / ga4_sessions</code> as the engagement-rate signal</li>
+            <li><code>engagement_per_session</code></li>
         </ul>
+
+        <p>
+            <code>engagement_per_session</code> is calculated as:
+        </p>
+
+        <pre><code>ga4_total_engagement_sec / ga4_sessions</code></pre>
+
 
         <h3>Weighted Opportunity Score</h3>
 
@@ -330,27 +353,58 @@
     </section>
 
 
+    <!-- 5. Evaluation -->
     <section>
         <h2>5. Evaluation</h2>
 
         <p>
-            The Opportunity Score is a deterministic ranking method rather than a trained
-            supervised model, so a conventional train-test split is not required for
-            generating the score.
+            The page-level data was evaluated using a client-grouped split. Grouping by
+            client prevents the same client from appearing in both evaluation groups.
         </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Evaluation property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Split</td>
+                    <td>80% / 20%</td>
+                </tr>
+
+                <tr>
+                    <td>Training clients</td>
+                    <td>52</td>
+                </tr>
+
+                <tr>
+                    <td>Evaluation clients</td>
+                    <td>13</td>
+                </tr>
+
+                <tr>
+                    <td>Client overlap</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>Random seed</td>
+                    <td>42</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <h3>Baseline vs Opportunity Score</h3>
 
         <p>
-            The baseline and Opportunity Score were compared on the same page-level
-            evaluation population using the same top-50 ranking cutoff.
+            The baseline and Opportunity Score were compared using the same evaluation
+            population and the same top-50 ranking cutoff.
         </p>
-
-        <p>
-            Because the available release covers only June 2026, there is no future
-            outcome available to determine whether either ranking leads to better
-            subsequent performance.
-        </p>
-
-        <h3>Ranking comparison</h3>
 
         <table>
             <thead>
@@ -394,12 +448,13 @@
             to evaluate whether the selected pages subsequently show improved outcomes.
         </p>
 
+
         <h3>Error analysis</h3>
 
         <p>
-            Some high-ranked pages have very low observed impressions. These pages can
-            receive a high opportunity score because poor average position contributes
-            to the ranking.
+            Some high-ranked Opportunity Score pages have extremely low observed
+            impressions. These pages can receive a high score because poor average
+            position contributes strongly to the ranking.
         </p>
 
         <p>
@@ -414,6 +469,7 @@
     </section>
 
 
+    <!-- 6. Interpretation -->
     <section>
         <h2>6. Interpretation</h2>
 
@@ -445,11 +501,31 @@
             there is no future outcome in the available June 2026 release.
         </p>
 
+
+        <h3>Weak-pick finding</h3>
+
         <p>
-            A negative result is also important: poor search position alone does not
-            necessarily indicate a practically useful refresh opportunity. Pages with
-            extremely low impressions can still receive high scores when position
-            contributes strongly to the score.
+            Some high-ranked Opportunity Score pages have very low impressions while
+            having very poor average search positions. These pages receive high scores
+            because the position component contributes strongly to the overall score.
+        </p>
+
+        <p>
+            This is a clear weak-pick pattern. A page with only a few impressions may not
+            be a practical refresh candidate even if its average position is poor.
+        </p>
+
+        <p>
+            This suggests that the current scoring weights should be treated as a first
+            version and that low-visibility pages require additional human review before
+            action.
+        </p>
+
+        <p>
+            A useful negative finding is that poor search position alone can contribute
+            substantially to the final score. The top-ranked results include pages with
+            very low impression counts, showing that the current scoring formulation does
+            not always correspond to practical refresh priority.
         </p>
 
         <p>
@@ -469,6 +545,7 @@
     </section>
 
 
+    <!-- 7. Recommendation -->
     <section>
         <h2>7. Recommendation</h2>
 
@@ -487,6 +564,7 @@
 
         <p><strong>Action:</strong> Review</p>
 
+
         <h3>2. Investigate pages with meaningful visibility and poor position</h3>
 
         <p>
@@ -496,6 +574,7 @@
         </p>
 
         <p><strong>Action:</strong> Audit</p>
+
 
         <h3>3. Use engagement as supporting evidence</h3>
 
@@ -507,6 +586,7 @@
 
         <p><strong>Action:</strong> Contextualize</p>
 
+
         <h3>4. Manually verify extremely low-impression recommendations</h3>
 
         <p>
@@ -516,6 +596,7 @@
         </p>
 
         <p><strong>Action:</strong> Verify</p>
+
 
         <h3>Confidence and limitations</h3>
 
@@ -543,6 +624,7 @@
     </section>
 
 
+    <!-- 8. Reproducibility -->
     <section>
         <h2>8. Reproducibility</h2>
 
@@ -556,12 +638,14 @@
             </a>
         </p>
 
+
         <h3>Relevant notebooks</h3>
 
         <ul>
             <li><code>work/notebooks/w04_baseline_score.ipynb</code></li>
             <li><code>work/notebooks/w05_model.ipynb</code></li>
         </ul>
+
 
         <h3>Environment</h3>
 
@@ -575,6 +659,7 @@
             <li>Jupyter / Google Colab</li>
         </ul>
 
+
         <h3>Re-run</h3>
 
         <pre><code>git clone https://github.com/Rohith84/Flyrank-Intern.git
@@ -582,9 +667,8 @@ cd Flyrank-Intern
 pip install -r requirements.txt</code></pre>
 
         <p>
-            The scoring weights are deterministic:
-            35% impressions, 30% CTR opportunity,
-            20% position opportunity, and 15% engagement opportunity.
+            Random seed: <strong>42</strong>.
+            Client-grouped split: <strong>80/20</strong>.
         </p>
 
         <p>
@@ -594,6 +678,7 @@ pip install -r requirements.txt</code></pre>
     </section>
 
 
+    <!-- Claims checklist -->
     <section>
         <h2>Claims checklist</h2>
 
