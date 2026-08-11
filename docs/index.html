@@ -3,100 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Capstone Report — Content Opportunity Scoring</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<main class="report">
 
     <header>
         <h1>Capstone Report — Content Opportunity Scoring</h1>
 
-        <div class="metadata">
-            <p><strong>Author:</strong> Rohith</p>
-            <p><strong>Lane:</strong> Refresh / Content Opportunity Scoring</p>
-            <p><strong>Repo:</strong>
-                <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
-                    GitHub Repository
-                </a>
-            </p>
-            <p><strong>Date:</strong> 2026-08-10</p>
-        </div>
+        <p><strong>Author:</strong> Rohith</p>
+        <p><strong>Lane:</strong> Refresh / Content Opportunity Scoring</p>
+        <p><strong>Repo:</strong>
+            <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
+                GitHub Repository
+            </a>
+        </p>
+        <p><strong>Date:</strong> 2026-08-10</p>
     </header>
 
 
-    <main>
+    <section>
+        <h2>1. Problem framing</h2>
 
-        <!-- 1 -->
-        <section>
-            <h2>1. Problem framing</h2>
+        <p>
+            This project supports the decision of which content pages should be reviewed
+            for potential refresh or optimization first when a content team has more pages
+            than it can review at once.
+        </p>
 
-            <p>
-                This project supports the decision of which content pages
-                should be reviewed for potential refresh or optimization
-                first when a content team has more pages than it can
-                review at once.
-            </p>
+        <p>
+            The unit of analysis is a content page aggregated over the June 2026
+            observation window. The output is a ranked Opportunity Score and an ordered
+            queue of pages for human review.
+        </p>
 
-            <p>
-                The unit of analysis is a content page aggregated over
-                the June 2026 observation window. The output is a ranked
-                Opportunity Score and an ordered queue of pages for
-                human review.
-            </p>
+        <p>
+            The intended action is for an editor or SEO/content team member to inspect
+            high-ranked pages and decide whether they are suitable candidates for actions
+            such as reviewing page content, titles, descriptions, internal links,
+            search-intent alignment, or other optimization opportunities.
+        </p>
 
-            <p>
-                The intended action is for an editor or SEO/content team
-                member to inspect high-ranked pages and decide whether
-                they are suitable candidates for actions such as reviewing
-                page content, titles, descriptions, internal links,
-                search-intent alignment, or other optimization opportunities.
-            </p>
+        <p>
+            The cost of a wrong recommendation is wasted optimization effort. A page with
+            little practical opportunity may receive attention while another page with
+            more meaningful search visibility remains unattended.
+        </p>
 
-            <p>
-                The cost of a wrong recommendation is wasted optimization
-                effort. A page with little practical opportunity may receive
-                attention while another page with more meaningful search
-                visibility remains unattended.
-            </p>
+        <p>
+            Data helps because impressions, clicks, CTR, average search position, and
+            engagement provide measurable signals that can be combined into a repeatable
+            prioritization framework rather than relying only on manual selection.
+        </p>
 
-            <p>
-                Data helps because impressions, clicks, CTR, average search
-                position, and engagement provide measurable signals that
-                can be combined into a repeatable prioritization framework
-                rather than relying only on manual selection.
-            </p>
-
-            <p>
-                This is a decision-support ranking problem, not a claim
-                that the score predicts Google's ranking algorithm or
-                guarantees future search performance.
-            </p>
-        </section>
+        <p>
+            This is a decision-support ranking problem, not a claim that the score predicts
+            Google's ranking algorithm or guarantees future search performance.
+        </p>
+    </section>
 
 
-        <!-- 2 -->
-        <section>
-            <h2>2. Data safety</h2>
+    <section>
+        <h2>2. Data safety</h2>
 
-            <p>
-                The analysis uses the FlyRank internship warehouse dataset,
-                specifically the content performance data available for
-                the June 2026 release.
-            </p>
+        <p>
+            The analysis uses the FlyRank internship warehouse dataset, specifically the
+            content performance data available for the June 2026 release.
+        </p>
 
-            <h3>Observation window</h3>
+        <h3>Observation window</h3>
 
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Property</th>
                     <th>Value</th>
                 </tr>
+            </thead>
 
+            <tbody>
                 <tr>
                     <td>Start date</td>
                     <td>2026-06-01</td>
@@ -131,69 +119,70 @@
                     <td>Unique months</td>
                     <td>1</td>
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-            <h3>Primary signals</h3>
+        <h3>Primary signals</h3>
 
-            <ul>
-                <li><code>gsc_impressions</code></li>
-                <li><code>ctr</code></li>
-                <li><code>gsc_avg_position</code></li>
-                <li>Engagement metrics</li>
-            </ul>
+        <ul>
+            <li><code>gsc_impressions</code></li>
+            <li><code>ctr</code></li>
+            <li><code>gsc_avg_position</code></li>
+            <li><code>ga4_engaged_sessions / ga4_sessions</code> as the engagement-rate signal</li>
+        </ul>
 
-            <h3>Excluded information</h3>
+        <h3>Excluded information</h3>
 
-            <ul>
-                <li>Client identifiers as predictive features</li>
-                <li>Content identifiers as predictive features</li>
-                <li>Future-window information</li>
-                <li>Label-derived fields</li>
-                <li>Private queries and URLs</li>
-            </ul>
+        <ul>
+            <li>Client identifiers as predictive features</li>
+            <li>Content identifiers as predictive features</li>
+            <li>Future-window information</li>
+            <li>Label-derived fields</li>
+            <li>Private queries and URLs</li>
+        </ul>
 
-            <p>
-                Pseudonymous identifiers such as
-                <code>client_hash_id</code> and
-                <code>content_hash_id</code> are used for grouping or
-                page identification only. They are not used as predictive
-                features.
-            </p>
+        <p>
+            Pseudonymous identifiers such as
+            <code>client_hash_id</code> and <code>content_hash_id</code>
+            are used for grouping or page identification only. They are not used as
+            predictive features.
+        </p>
 
-            <p>
-                Fields such as <code>trend_direction</code> and
-                <code>trend_pct</code> were not used. No client names,
-                private URLs, private queries, or other client-identifying
-                information are intentionally included in
-                <code>work/</code>.
-            </p>
-        </section>
+        <p>
+            Fields such as <code>trend_direction</code> and
+            <code>trend_pct</code> were not used. No client names, private URLs,
+            private queries, or other client-identifying information are intentionally
+            included in <code>work/</code>.
+        </p>
+    </section>
 
 
-        <!-- 3 -->
-        <section>
-            <h2>3. Baseline</h2>
+    <section>
+        <h2>3. Baseline</h2>
 
-            <p>
-                The first baseline was a transparent rule-based ranking
-                approach developed during Week 4.
-            </p>
+        <p>
+            The first baseline was a transparent rule-based ranking approach developed
+            during Week 4.
+        </p>
 
-            <p>
-                The baseline uses two observable signals:
-            </p>
+        <p>
+            The baseline uses two observable signals:
+        </p>
 
-            <ol>
-                <li>High impressions</li>
-                <li>Low CTR</li>
-            </ol>
+        <ol>
+            <li>High impressions</li>
+            <li>Low CTR</li>
+        </ol>
 
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Baseline parameter</th>
                     <th>Observed value</th>
                 </tr>
+            </thead>
 
+            <tbody>
                 <tr>
                     <td>High-impression threshold</td>
                     <td>524</td>
@@ -203,33 +192,35 @@
                     <td>Low-CTR threshold</td>
                     <td>0.0</td>
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-            <p>
-                The low-CTR threshold is an important limitation because
-                a substantial number of pages have zero observed CTR.
-                Therefore, the baseline is relatively coarse and does
-                not distinguish between different low-CTR values below
-                a positive threshold.
-            </p>
+        <p>
+            The low-CTR threshold is an important limitation because the observed data
+            contains many pages with zero CTR. Therefore, this baseline is relatively
+            coarse and does not distinguish between different levels of low CTR below a
+            positive threshold.
+        </p>
 
-            <p>
-                The baseline is a fair starting point because it uses
-                simple, observable search signals and can be understood
-                without a machine learning model.
-            </p>
+        <p>
+            The baseline is a fair starting point because it uses simple, observable
+            search signals and can be understood without a machine learning model.
+        </p>
 
-            <p>
-                The baseline and Opportunity Score were evaluated on
-                the same evaluation population.
-            </p>
+        <p>
+            The baseline and Opportunity Score were evaluated on the same page-level
+            evaluation population.
+        </p>
 
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Comparison</th>
                     <th>Result</th>
                 </tr>
+            </thead>
 
+            <tbody>
                 <tr>
                     <td>Baseline top 50</td>
                     <td>50 pages</td>
@@ -254,42 +245,44 @@
                     <td>Baseline-only pages</td>
                     <td>50</td>
                 </tr>
-            </table>
-        </section>
+            </tbody>
+        </table>
+    </section>
 
 
-        <!-- 4 -->
-        <section>
-            <h2>4. Model / analysis</h2>
+    <section>
+        <h2>4. Model / analysis</h2>
 
-            <p>
-                The final method is a weighted Content Opportunity Score
-                rather than a supervised machine learning classifier.
-            </p>
+        <p>
+            The final method is a weighted Content Opportunity Score rather than a
+            supervised machine learning classifier.
+        </p>
 
-            <p>
-                The method fits the lane because the immediate objective
-                is to prioritize pages for human review using several
-                observable search and engagement signals.
-            </p>
+        <p>
+            The method fits the lane because the immediate objective is to prioritize
+            pages for human review using several observable search and engagement signals.
+        </p>
 
-            <h3>Features</h3>
+        <h3>Features</h3>
 
-            <ul>
-                <li><code>gsc_impressions</code></li>
-                <li><code>ctr</code></li>
-                <li><code>gsc_avg_position</code></li>
-                <li>Engagement per session</li>
-            </ul>
+        <ul>
+            <li><code>gsc_impressions</code></li>
+            <li><code>ctr</code></li>
+            <li><code>gsc_avg_position</code></li>
+            <li><code>ga4_engaged_sessions / ga4_sessions</code> as the engagement-rate signal</li>
+        </ul>
 
-            <h3>Weighted Opportunity Score</h3>
+        <h3>Weighted Opportunity Score</h3>
 
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Signal</th>
                     <th>Weight</th>
                 </tr>
+            </thead>
 
+            <tbody>
                 <tr>
                     <td>Impressions</td>
                     <td>35%</td>
@@ -309,86 +302,66 @@
                     <td>Engagement opportunity</td>
                     <td>15%</td>
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-            <p>
-                Client and content identifiers were left out intentionally
-                because they identify entities rather than represent useful
-                behavioral signals.
-            </p>
+        <p>
+            Client and content identifiers were left out intentionally because they
+            identify entities rather than represent useful behavioral signals.
+        </p>
 
-            <p>
-                Future performance variables and label-derived variables
-                were also excluded to avoid leakage.
-            </p>
+        <p>
+            Future performance variables and label-derived variables were also excluded
+            to avoid leakage.
+        </p>
 
-            <p>
-                There is no supervised target in the final scoring analysis.
-                Instead, the output is a defined Opportunity Score, which
-                acts as a prioritization proxy.
-            </p>
+        <p>
+            There is no supervised target in this analysis. The Opportunity Score is used
+            as a prioritization proxy that ranks pages according to their observed search
+            visibility, CTR, average position, and engagement signals.
+        </p>
 
-            <p>
-                <strong>Target / proxy definition:</strong>
-                The Opportunity Score represents the relative priority
-                of a content page for human review based on its observed
-                search visibility, CTR, search position, and engagement
-                signals.
-            </p>
-        </section>
+        <p>
+            <strong>Target / proxy definition:</strong>
+            There is no supervised target in this analysis. The Opportunity Score is used
+            as a prioritization proxy that ranks pages according to their observed search
+            visibility, CTR, average position, and engagement signals.
+        </p>
+    </section>
 
 
-        <!-- 5 -->
-        <section>
-            <h2>5. Evaluation</h2>
+    <section>
+        <h2>5. Evaluation</h2>
 
-            <p>
-                The page-level data was evaluated using a client-grouped
-                split. Grouping by client prevents the same client from
-                appearing in both evaluation groups.
-            </p>
+        <p>
+            The Opportunity Score is a deterministic ranking method rather than a trained
+            supervised model, so a conventional train-test split is not required for
+            generating the score.
+        </p>
 
-            <table>
-                <tr>
-                    <th>Evaluation property</th>
-                    <th>Value</th>
-                </tr>
+        <p>
+            The baseline and Opportunity Score were compared on the same page-level
+            evaluation population using the same top-50 ranking cutoff.
+        </p>
 
-                <tr>
-                    <td>Split</td>
-                    <td>80% / 20%</td>
-                </tr>
+        <p>
+            Because the available release covers only June 2026, there is no future
+            outcome available to determine whether either ranking leads to better
+            subsequent performance.
+        </p>
 
-                <tr>
-                    <td>Training clients</td>
-                    <td>52</td>
-                </tr>
+        <h3>Ranking comparison</h3>
 
-                <tr>
-                    <td>Evaluation clients</td>
-                    <td>13</td>
-                </tr>
-
-                <tr>
-                    <td>Client overlap</td>
-                    <td>0</td>
-                </tr>
-
-                <tr>
-                    <td>Random seed</td>
-                    <td>42</td>
-                </tr>
-            </table>
-
-            <h3>Model vs baseline</h3>
-
-            <table>
+        <table>
+            <thead>
                 <tr>
                     <th>Measure</th>
                     <th>Baseline</th>
                     <th>Opportunity Score</th>
                 </tr>
+            </thead>
 
+            <tbody>
                 <tr>
                     <td>Top-50 pages</td>
                     <td>50</td>
@@ -406,278 +379,243 @@
                     <td>50</td>
                     <td>50</td>
                 </tr>
-            </table>
+            </tbody>
+        </table>
 
-            <p>
-                The zero-overlap result shows that the multi-signal scoring
-                method produces a substantially different prioritization
-                from the simpler baseline.
-            </p>
+        <p>
+            The two methods selected different pages for the top-50 queue. This shows
+            that the multi-signal scoring approach changes prioritization compared with
+            the simpler baseline.
+        </p>
 
-            <p>
-                It does not establish that one ranking is more accurate
-                because the available dataset contains only June 2026 and
-                therefore does not provide a future outcome against which
-                the recommendations can be evaluated.
-            </p>
+        <p>
+            However, different rankings do not by themselves establish that one method is
+            more accurate or more effective. A future observation window would be required
+            to evaluate whether the selected pages subsequently show improved outcomes.
+        </p>
 
-            <h3>Error analysis</h3>
+        <h3>Error analysis</h3>
 
-            <p>
-                Some high-ranked Opportunity Score pages have extremely
-                low observed impressions. These pages can receive a high
-                opportunity component because their average search position
-                is poor.
-            </p>
+        <p>
+            Some high-ranked pages have very low observed impressions. These pages can
+            receive a high opportunity score because poor average position contributes
+            to the ranking.
+        </p>
 
-            <p>
-                However, extremely low visibility may make them less
-                practical refresh candidates. This is an important weak-pick
-                pattern.
-            </p>
+        <p>
+            This is a potential weak-pick pattern. Such pages should therefore be
+            manually reviewed before an editor decides to invest optimization effort.
+        </p>
 
-            <p>
-                The score should therefore be treated as a review queue
-                rather than an automatic action list.
-            </p>
-        </section>
+        <p>
+            The score should be treated as a decision-support ranking rather than an
+            automatic action list.
+        </p>
+    </section>
 
 
-        <!-- 6 -->
-        <section>
-            <h2>6. Interpretation</h2>
+    <section>
+        <h2>6. Interpretation</h2>
 
-            <p>
-                The main observed finding is that the Opportunity Score
-                and the Week-4 baseline prioritize substantially different
-                pages.
-            </p>
+        <p>
+            The main observed finding is that the Opportunity Score and the Week-4
+            baseline prioritize substantially different pages.
+        </p>
 
-            <p>
-                The baseline concentrates on a simpler combination of
-                high impressions and low CTR.
-            </p>
+        <p>
+            The baseline concentrates on a simpler combination of high impressions and
+            low CTR.
+        </p>
 
-            <p>
-                The Opportunity Score introduces additional signals:
-                CTR, position, and engagement. As a result, pages with
-                different combinations of search visibility, position,
-                CTR, and engagement can move into the highest-priority
-                portion of the queue.
-            </p>
+        <p>
+            The Opportunity Score introduces additional signals: CTR, position, and
+            engagement. As a result, pages with different combinations of search
+            visibility, position, CTR, and engagement can move into the highest-priority
+            portion of the queue.
+        </p>
 
-            <p>
-                The strongest measurable difference is the zero overlap
-                between the two top-50 queues.
-            </p>
+        <p>
+            The clearest measurable difference is the zero overlap between the two
+            top-50 queues, showing that the additional signals substantially change
+            which pages are prioritized.
+        </p>
 
-            <p>
-                This means that adding multiple signals changes the
-                prioritization substantially under the defined scoring
-                weights.
-            </p>
+        <p>
+            This does not establish that the Opportunity Score is more accurate because
+            there is no future outcome in the available June 2026 release.
+        </p>
 
-            <p>
-                A negative result is also important: poor search position
-                alone does not necessarily indicate a practically useful
-                refresh opportunity. Pages with extremely low impressions
-                can still receive high scores when position contributes
-                strongly to the score.
-            </p>
+        <p>
+            A negative result is also important: poor search position alone does not
+            necessarily indicate a practically useful refresh opportunity. Pages with
+            extremely low impressions can still receive high scores when position
+            contributes strongly to the score.
+        </p>
 
-            <p>
-                This indicates that the ranking requires human
-                interpretation.
-            </p>
+        <p>
+            This indicates that the ranking requires human interpretation.
+        </p>
 
-            <p>
-                The manually selected weights are another limitation.
-                They provide transparency, but they are not learned from
-                a future outcome.
-            </p>
+        <p>
+            The manually selected weights are another limitation. They provide
+            transparency, but they are not learned from a future outcome.
+        </p>
 
-            <p>
-                Because there is no future month in the available release,
-                the analysis cannot determine whether the pages selected
-                by either ranking subsequently improve or decline.
-            </p>
-        </section>
+        <p>
+            Because there is no future month in the available release, the analysis
+            cannot determine whether the pages selected by either ranking subsequently
+            improve or decline.
+        </p>
+    </section>
 
 
-        <!-- 7 -->
-        <section>
-            <h2>7. Recommendation</h2>
+    <section>
+        <h2>7. Recommendation</h2>
 
-            <p>
-                The ranked output should be used as a decision-support
-                queue for content editors and SEO teams.
-            </p>
+        <p>
+            The ranked output should be used as a decision-support queue for content
+            editors and SEO teams.
+        </p>
 
-            <h3>1. Review high-visibility pages with weak CTR</h3>
+        <h3>1. Review high-visibility pages with weak CTR</h3>
 
-            <p>
-                Pages with meaningful impressions and weaker CTR can be
-                investigated for possible title, description, search-intent,
-                or content-presentation improvements.
-            </p>
+        <p>
+            Pages with meaningful impressions and weaker CTR can be investigated for
+            possible title, description, search-intent, or content-presentation
+            improvements.
+        </p>
 
-            <p><strong>Action:</strong> Review</p>
+        <p><strong>Action:</strong> Review</p>
 
+        <h3>2. Investigate pages with meaningful visibility and poor position</h3>
 
-            <h3>2. Investigate pages with meaningful visibility and poor position</h3>
+        <p>
+            Pages receiving impressions while appearing at weaker search positions can
+            be examined for content relevance, internal linking, topical coverage, and
+            other optimization opportunities.
+        </p>
 
-            <p>
-                Pages receiving impressions while appearing at weaker
-                search positions can be examined for content relevance,
-                internal linking, topical coverage, and other optimization
-                opportunities.
-            </p>
+        <p><strong>Action:</strong> Audit</p>
 
-            <p><strong>Action:</strong> Audit</p>
+        <h3>3. Use engagement as supporting evidence</h3>
 
+        <p>
+            Engagement should provide additional context when deciding whether a page
+            deserves review. It should not automatically determine whether a page should
+            be refreshed.
+        </p>
 
-            <h3>3. Use engagement as supporting evidence</h3>
+        <p><strong>Action:</strong> Contextualize</p>
 
-            <p>
-                Engagement should provide additional context when deciding
-                whether a page deserves review. It should not automatically
-                determine whether a page should be refreshed.
-            </p>
+        <h3>4. Manually verify extremely low-impression recommendations</h3>
 
-            <p><strong>Action:</strong> Contextualize</p>
+        <p>
+            Pages with very few impressions can receive high Opportunity Scores because
+            poor search position contributes to the score. These pages should not
+            automatically be placed ahead of pages with meaningful search visibility.
+        </p>
 
+        <p><strong>Action:</strong> Verify</p>
 
-            <h3>4. Manually verify extremely low-impression recommendations</h3>
+        <h3>Confidence and limitations</h3>
 
-            <p>
-                Pages with very few impressions can receive high Opportunity
-                Scores because poor search position contributes to the score.
-                These pages should not automatically be placed ahead of
-                pages with meaningful search visibility.
-            </p>
+        <p>
+            Confidence is moderate for the ranking behavior itself because the score is
+            deterministic and the two ranking strategies can be directly compared on
+            the same evaluation population.
+        </p>
 
-            <p><strong>Action:</strong> Verify</p>
+        <p>
+            Confidence is low for future performance claims because the available release
+            contains only June 2026 and provides no future outcome against which
+            predictive performance can be measured.
+        </p>
 
+        <p>
+            The Opportunity Score should therefore be used as a directional
+            decision-support mechanism, not as proof that a refresh will improve rankings,
+            traffic, CTR, or engagement.
+        </p>
 
-            <h3>Confidence and limitations</h3>
-
-            <p>
-                Confidence is moderate for the ranking behavior itself
-                because the score is deterministic and the two ranking
-                strategies can be directly compared on the same evaluation
-                population.
-            </p>
-
-            <p>
-                Confidence is low for future performance claims because
-                the available release contains only June 2026 and provides
-                no future outcome against which predictive performance
-                can be measured.
-            </p>
-
-            <p>
-                The Opportunity Score should therefore be used as a
-                directional decision-support mechanism, not as proof that
-                a refresh will improve rankings, traffic, CTR, or engagement.
-            </p>
-
-            <p>
-                No causal claim is made.
-            </p>
-        </section>
+        <p>
+            No causal claim is made.
+        </p>
+    </section>
 
 
-        <!-- 8 -->
-        <section>
-            <h2>8. Reproducibility</h2>
+    <section>
+        <h2>8. Reproducibility</h2>
 
-            <p>
-                The project is maintained in the public repository:
-            </p>
+        <p>
+            The project is maintained in the public repository:
+        </p>
 
-            <p>
-                <a
-                    href="https://github.com/Rohith84/Flyrank-Intern"
-                    target="_blank"
-                >
-                    https://github.com/Rohith84/Flyrank-Intern
-                </a>
-            </p>
+        <p>
+            <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
+                https://github.com/Rohith84/Flyrank-Intern
+            </a>
+        </p>
 
-            <h3>Relevant notebooks</h3>
+        <h3>Relevant notebooks</h3>
 
-            <ul>
-                <li>
-                    <code>work/notebooks/w04_baseline_score.ipynb</code>
-                </li>
+        <ul>
+            <li><code>work/notebooks/w04_baseline_score.ipynb</code></li>
+            <li><code>work/notebooks/w05_model.ipynb</code></li>
+        </ul>
 
-                <li>
-                    <code>work/notebooks/w05_model.ipynb</code>
-                </li>
-            </ul>
+        <h3>Environment</h3>
 
-            <h3>Environment</h3>
+        <ul>
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>NumPy</li>
+            <li>DuckDB</li>
+            <li>scikit-learn</li>
+            <li>Hugging Face Hub</li>
+            <li>Jupyter / Google Colab</li>
+        </ul>
 
-            <ul>
-                <li>Python</li>
-                <li>Pandas</li>
-                <li>NumPy</li>
-                <li>DuckDB</li>
-                <li>scikit-learn</li>
-                <li>Hugging Face Hub</li>
-                <li>Jupyter / Google Colab</li>
-            </ul>
+        <h3>Re-run</h3>
 
-            <h3>Re-run</h3>
-
-            <pre><code>git clone https://github.com/Rohith84/Flyrank-Intern.git
+        <pre><code>git clone https://github.com/Rohith84/Flyrank-Intern.git
 cd Flyrank-Intern
 pip install -r requirements.txt</code></pre>
 
-            <p>
-                Random seed: <strong>42</strong>.
-                Client-grouped split: <strong>80/20</strong>.
-            </p>
+        <p>
+            The scoring weights are deterministic:
+            35% impressions, 30% CTR opportunity,
+            20% position opportunity, and 15% engagement opportunity.
+        </p>
 
-            <p>
-                The relevant notebooks should be executed from top to
-                bottom in a clean runtime with the required dataset access
-                and dependencies.
-            </p>
-        </section>
+        <p>
+            The relevant notebooks should be executed from top to bottom in a clean
+            runtime with the required dataset access and dependencies.
+        </p>
+    </section>
 
 
-        <!-- CLAIMS -->
+    <section>
+        <h2>Claims checklist</h2>
 
-        <section class="claims">
-            <h2>Claims checklist</h2>
-
-            <ul>
-                <li>Observed</li>
-                <li>Measured</li>
-                <li>Directional</li>
-                <li>Decision-support</li>
-                <li>No causal claims</li>
-                <li>No claim of predicting Google's algorithm</li>
-                <li>No client-identifying details</li>
-                <li>June-only dataset limitation reported</li>
-            </ul>
-        </section>
-
-    </main>
+        <ul class="checklist">
+            <li>Observed</li>
+            <li>Measured</li>
+            <li>Directional</li>
+            <li>Decision-support</li>
+            <li>No causal claims</li>
+            <li>No claim of predicting Google's algorithm</li>
+            <li>No client-identifying details</li>
+            <li>June-only dataset limitation reported</li>
+        </ul>
+    </section>
 
 
     <footer>
-        <p>
-            Capstone Report — Content Opportunity Scoring
-        </p>
-
-        <p>
-            FlyRank ML Internship · 2026
-        </p>
+        <p>Capstone Report — Content Opportunity Scoring</p>
+        <p>FlyRank ML Internship · 2026</p>
     </footer>
 
-</div>
+</main>
 
 </body>
 </html>
