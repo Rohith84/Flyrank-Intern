@@ -9,31 +9,42 @@
 
 <body>
 
-<main class="report">
+<div class="report">
 
-    <header>
+    <!-- HEADER -->
+    <header class="report-header">
+
         <h1>Capstone Report — Content Opportunity Scoring</h1>
 
-        <p><strong>Author:</strong> Rohith</p>
+        <div class="metadata">
 
-        <p>
-            <strong>Lane:</strong>
-            Refresh / Content Opportunity Scoring
-        </p>
+            <p>
+                <strong>Author:</strong> Rohith
+            </p>
 
-        <p>
-            <strong>Repo:</strong>
-            <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
-                GitHub Repository
-            </a>
-        </p>
+            <p>
+                <strong>Lane:</strong> Refresh / Content Opportunity Scoring
+            </p>
 
-        <p><strong>Date:</strong> 2026-08-10</p>
+            <p>
+                <strong>Repo:</strong>
+                <a href="https://github.com/Rohith84/Flyrank-Intern" target="_blank">
+                    GitHub Repository
+                </a>
+            </p>
+
+            <p>
+                <strong>Date:</strong> 2026-08-10
+            </p>
+
+        </div>
+
     </header>
 
 
-    <!-- 1. Problem framing -->
+    <!-- 1. PROBLEM FRAMING -->
     <section>
+
         <h2>1. Problem framing</h2>
 
         <p>
@@ -71,11 +82,13 @@
             This is a decision-support ranking problem, not a claim that the score predicts
             Google's ranking algorithm or guarantees future search performance.
         </p>
+
     </section>
 
 
-    <!-- 2. Data safety -->
+    <!-- 2. DATA SAFETY -->
     <section>
+
         <h2>2. Data safety</h2>
 
         <p>
@@ -86,6 +99,7 @@
         <h3>Observation window</h3>
 
         <table>
+
             <thead>
                 <tr>
                     <th>Property</th>
@@ -94,6 +108,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>Start date</td>
                     <td>2026-06-01</td>
@@ -128,31 +143,50 @@
                     <td>Unique months</td>
                     <td>1</td>
                 </tr>
+
             </tbody>
+
         </table>
 
 
         <h3>Primary signals</h3>
 
         <ul>
-            <li><code>gsc_impressions</code></li>
-            <li><code>ctr</code></li>
-            <li><code>gsc_avg_position</code></li>
+
+            <li>
+                <code>gsc_impressions</code>
+            </li>
+
+            <li>
+                <code>ctr</code>
+            </li>
+
+            <li>
+                <code>gsc_avg_position</code>
+            </li>
+
             <li>
                 <code>engagement_per_session</code>
                 (<code>ga4_total_engagement_sec / ga4_sessions</code>)
             </li>
+
         </ul>
 
 
         <h3>Excluded information</h3>
 
         <ul>
+
             <li>Client identifiers as predictive features</li>
+
             <li>Content identifiers as predictive features</li>
+
             <li>Future-window information</li>
+
             <li>Label-derived fields</li>
+
             <li>Private queries and URLs</li>
+
         </ul>
 
         <p>
@@ -168,11 +202,13 @@
             private queries, or other client-identifying information are intentionally
             included in <code>work/</code>.
         </p>
+
     </section>
 
 
-    <!-- 3. Baseline -->
+    <!-- 3. BASELINE -->
     <section>
+
         <h2>3. Baseline</h2>
 
         <p>
@@ -185,11 +221,16 @@
         </p>
 
         <ol>
+
             <li>High impressions</li>
+
             <li>Low CTR</li>
+
         </ol>
 
+
         <table>
+
             <thead>
                 <tr>
                     <th>Baseline parameter</th>
@@ -198,6 +239,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>High-impression threshold</td>
                     <td>524</td>
@@ -207,8 +249,11 @@
                     <td>Low-CTR threshold</td>
                     <td>0.0</td>
                 </tr>
+
             </tbody>
+
         </table>
+
 
         <p>
             The low-CTR threshold is an important limitation because the observed data
@@ -227,7 +272,9 @@
             evaluation population.
         </p>
 
+
         <table>
+
             <thead>
                 <tr>
                     <th>Comparison</th>
@@ -236,6 +283,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>Baseline top 50</td>
                     <td>50 pages</td>
@@ -260,13 +308,17 @@
                     <td>Baseline-only pages</td>
                     <td>50</td>
                 </tr>
+
             </tbody>
+
         </table>
+
     </section>
 
 
-    <!-- 4. Model / analysis -->
+    <!-- 4. MODEL / ANALYSIS -->
     <section>
+
         <h2>4. Model / analysis</h2>
 
         <p>
@@ -279,14 +331,29 @@
             pages for human review using several observable search and engagement signals.
         </p>
 
+
         <h3>Features</h3>
 
         <ul>
-            <li><code>gsc_impressions</code></li>
-            <li><code>ctr</code></li>
-            <li><code>gsc_avg_position</code></li>
-            <li><code>engagement_per_session</code></li>
+
+            <li>
+                <code>gsc_impressions</code>
+            </li>
+
+            <li>
+                <code>ctr</code>
+            </li>
+
+            <li>
+                <code>gsc_avg_position</code>
+            </li>
+
+            <li>
+                <code>engagement_per_session</code>
+            </li>
+
         </ul>
+
 
         <p>
             <code>engagement_per_session</code> is calculated as:
@@ -298,6 +365,7 @@
         <h3>Weighted Opportunity Score</h3>
 
         <table>
+
             <thead>
                 <tr>
                     <th>Signal</th>
@@ -306,6 +374,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>Impressions</td>
                     <td>35%</td>
@@ -325,8 +394,11 @@
                     <td>Engagement opportunity</td>
                     <td>15%</td>
                 </tr>
+
             </tbody>
+
         </table>
+
 
         <p>
             Client and content identifiers were left out intentionally because they
@@ -350,11 +422,13 @@
             as a prioritization proxy that ranks pages according to their observed search
             visibility, CTR, average position, and engagement signals.
         </p>
+
     </section>
 
 
-    <!-- 5. Evaluation -->
+    <!-- 5. EVALUATION -->
     <section>
+
         <h2>5. Evaluation</h2>
 
         <p>
@@ -362,7 +436,9 @@
             client prevents the same client from appearing in both evaluation groups.
         </p>
 
+
         <table>
+
             <thead>
                 <tr>
                     <th>Evaluation property</th>
@@ -371,6 +447,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>Split</td>
                     <td>80% / 20%</td>
@@ -395,7 +472,9 @@
                     <td>Random seed</td>
                     <td>42</td>
                 </tr>
+
             </tbody>
+
         </table>
 
 
@@ -406,7 +485,9 @@
             population and the same top-50 ranking cutoff.
         </p>
 
+
         <table>
+
             <thead>
                 <tr>
                     <th>Measure</th>
@@ -416,6 +497,7 @@
             </thead>
 
             <tbody>
+
                 <tr>
                     <td>Top-50 pages</td>
                     <td>50</td>
@@ -433,8 +515,11 @@
                     <td>50</td>
                     <td>50</td>
                 </tr>
+
             </tbody>
+
         </table>
+
 
         <p>
             The two methods selected different pages for the top-50 queue. This shows
@@ -466,11 +551,13 @@
             The score should be treated as a decision-support ranking rather than an
             automatic action list.
         </p>
+
     </section>
 
 
-    <!-- 6. Interpretation -->
+    <!-- 6. INTERPRETATION -->
     <section>
+
         <h2>6. Interpretation</h2>
 
         <p>
@@ -542,17 +629,20 @@
             cannot determine whether the pages selected by either ranking subsequently
             improve or decline.
         </p>
+
     </section>
 
 
-    <!-- 7. Recommendation -->
+    <!-- 7. RECOMMENDATION -->
     <section>
+
         <h2>7. Recommendation</h2>
 
         <p>
             The ranked output should be used as a decision-support queue for content
             editors and SEO teams.
         </p>
+
 
         <h3>1. Review high-visibility pages with weak CTR</h3>
 
@@ -562,7 +652,9 @@
             improvements.
         </p>
 
-        <p><strong>Action:</strong> Review</p>
+        <p>
+            <strong>Action:</strong> Review
+        </p>
 
 
         <h3>2. Investigate pages with meaningful visibility and poor position</h3>
@@ -573,7 +665,9 @@
             other optimization opportunities.
         </p>
 
-        <p><strong>Action:</strong> Audit</p>
+        <p>
+            <strong>Action:</strong> Audit
+        </p>
 
 
         <h3>3. Use engagement as supporting evidence</h3>
@@ -584,7 +678,9 @@
             be refreshed.
         </p>
 
-        <p><strong>Action:</strong> Contextualize</p>
+        <p>
+            <strong>Action:</strong> Contextualize
+        </p>
 
 
         <h3>4. Manually verify extremely low-impression recommendations</h3>
@@ -595,7 +691,9 @@
             automatically be placed ahead of pages with meaningful search visibility.
         </p>
 
-        <p><strong>Action:</strong> Verify</p>
+        <p>
+            <strong>Action:</strong> Verify
+        </p>
 
 
         <h3>Confidence and limitations</h3>
@@ -621,11 +719,13 @@
         <p>
             No causal claim is made.
         </p>
+
     </section>
 
 
-    <!-- 8. Reproducibility -->
+    <!-- 8. REPRODUCIBILITY -->
     <section>
+
         <h2>8. Reproducibility</h2>
 
         <p>
@@ -642,21 +742,36 @@
         <h3>Relevant notebooks</h3>
 
         <ul>
-            <li><code>work/notebooks/w04_baseline_score.ipynb</code></li>
-            <li><code>work/notebooks/w05_model.ipynb</code></li>
+
+            <li>
+                <code>work/notebooks/w04_baseline_score.ipynb</code>
+            </li>
+
+            <li>
+                <code>work/notebooks/w05_model.ipynb</code>
+            </li>
+
         </ul>
 
 
         <h3>Environment</h3>
 
         <ul>
+
             <li>Python</li>
+
             <li>Pandas</li>
+
             <li>NumPy</li>
+
             <li>DuckDB</li>
+
             <li>scikit-learn</li>
+
             <li>Hugging Face Hub</li>
+
             <li>Jupyter / Google Colab</li>
+
         </ul>
 
 
@@ -665,6 +780,7 @@
         <pre><code>git clone https://github.com/Rohith84/Flyrank-Intern.git
 cd Flyrank-Intern
 pip install -r requirements.txt</code></pre>
+
 
         <p>
             Random seed: <strong>42</strong>.
@@ -675,32 +791,52 @@ pip install -r requirements.txt</code></pre>
             The relevant notebooks should be executed from top to bottom in a clean
             runtime with the required dataset access and dependencies.
         </p>
+
     </section>
 
 
-    <!-- Claims checklist -->
+    <!-- CLAIMS CHECKLIST -->
     <section>
+
         <h2>Claims checklist</h2>
 
-        <ul class="checklist">
+        <ul>
+
             <li>Observed</li>
+
             <li>Measured</li>
+
             <li>Directional</li>
+
             <li>Decision-support</li>
+
             <li>No causal claims</li>
+
             <li>No claim of predicting Google's algorithm</li>
+
             <li>No client-identifying details</li>
+
             <li>June-only dataset limitation reported</li>
+
         </ul>
+
     </section>
 
 
+    <!-- FOOTER -->
     <footer>
-        <p>Capstone Report — Content Opportunity Scoring</p>
-        <p>FlyRank ML Internship · 2026</p>
+
+        <p>
+            Capstone Report — Content Opportunity Scoring
+        </p>
+
+        <p>
+            FlyRank ML Internship · 2026
+        </p>
+
     </footer>
 
-</main>
+</div>
 
 </body>
 </html>
